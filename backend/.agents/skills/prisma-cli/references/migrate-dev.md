@@ -18,13 +18,13 @@ prisma migrate dev [options]
 
 ## Options
 
-| Option | Description |
-|--------|-------------|
-| `--name` / `-n` | Name the migration |
-| `--create-only` | Create a new migration but do not apply it |
-| `--schema` | Custom path to your Prisma schema |
-| `--config` | Custom path to your Prisma config file |
-| `--url` | Override the datasource URL from the Prisma config file |
+| Option          | Description                                             |
+| --------------- | ------------------------------------------------------- |
+| `--name` / `-n` | Name the migration                                      |
+| `--create-only` | Create a new migration but do not apply it              |
+| `--schema`      | Custom path to your Prisma schema                       |
+| `--config`      | Custom path to your Prisma config file                  |
+| `--url`         | Override the datasource URL from the Prisma config file |
 
 ### Follow-up Commands
 
@@ -111,7 +111,7 @@ model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String?
-  createdAt DateTime @default(now())  // New field
+  createdAt DateTime @default(now()) // New field
 }
 ```
 
@@ -139,7 +139,7 @@ export default defineConfig({
     url: env('DATABASE_URL'),
     shadowDatabaseUrl: env('SHADOW_DATABASE_URL'),
   },
-})
+});
 ```
 
 For local Prisma Postgres (`prisma dev`), shadow database is handled automatically.
