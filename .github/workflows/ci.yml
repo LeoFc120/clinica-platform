@@ -1,0 +1,30 @@
+name: Integración Continua (CI)
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Instalar dependencias raíz y verificar formato
+        run: |
+          npm install
+          npx prettier --check "**/*.{ts,tsx,js,jsx,json,md,prisma}"
+
+      - name: Instalar dependencias del backend y ejecutar pruebas de API
+        run: |
+          cd backend
+          npm install
+          npm run test
