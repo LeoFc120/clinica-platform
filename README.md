@@ -1,22 +1,25 @@
 # clinica-platform
 
-- Estado del Pipeline: CI/CD activo y ramas protegidas.
+> **Estado del Pipeline:** CI/CD activo y ramas protegidas.
 
-Requisitos previos obligatorios:
+## Requisitos previos obligatorios
 
-Docker Desktop instalado y abierto.
-Node.js (v24).
-VS Code con terminal configurada en Command Prompt (cmd) o Git Bash (eviten PowerShell para prevenir bloqueos de npm).
+* Docker Desktop instalado y abierto.
+* Node.js (v24).
+* VS Code con terminal configurada en Command Prompt (cmd) o Git Bash (eviten PowerShell para prevenir bloqueos de npm).
 
-1. Clonación y Sincronización Base
-   Al clonar, Git muestra por defecto la rama vacía. Es crítico cambiarse a la rama de desarrollo inmediatamente.
+---
 
+## 1. Clonación y Sincronización Base
+Al clonar, Git muestra por defecto la rama vacía. Es crítico cambiarse a la rama de desarrollo inmediatamente.
+
+```bash
 git clone https://github.com/LeoFc120/clinica-platform.git
 cd clinica-platform
 git checkout develop
 code .
 
-2. Identidad de Git (Prevención de errores al guardar)
+ 2. Identidad de Git (Prevención de errores al guardar)
    Para evitar el error "Author identity unknown" al intentar subir código, configuren su firma electrónica en la terminal de VS Code:
 
 git config --global user.name "Tu Nombre Real"
