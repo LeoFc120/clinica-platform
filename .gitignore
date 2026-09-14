@@ -32,3 +32,11 @@ yarn-error.log*
 # OS files
 .DS_Store
 Thumbs.db
+
+
+# TypeScript compiled files
+*.js
+*.d.ts
+*.js.map
+**/*.map
+**/*.d.ts
