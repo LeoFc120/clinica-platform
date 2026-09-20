@@ -1,4 +1,5 @@
 # Tareas
+
 ## Estados permitidos
 
 - PENDING
@@ -39,7 +40,7 @@ Rol:
 Arquitectura / Integración
 
 Estado:
-READY
+IN_PROGRESS
 
 Prioridad:
 HIGH
@@ -100,13 +101,13 @@ Archivos esperados:
 
 Criterios de aceptación:
 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ]
+- [ ]
+- [ ]
 
 Pruebas requeridas:
 
-- [ ] 
+- [ ]
 
 PR:
 

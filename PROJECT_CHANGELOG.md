@@ -1,4 +1,5 @@
 # Changelog
+
 ## 2026-09-17
 
 ### Repository
@@ -50,24 +51,38 @@ Se estableció el equipo de seis integrantes:
 
 ### Added
 
-- 
+-
 
 ### Changed
 
-- 
+-
 
 ### Fixed
 
-- 
+-
 
 ### Tests
 
-- 
+-
 
 ### Documentation
 
-- 
+-
 
 ### Integration
 
-- 
+-
+
+## 2026-09-20
+
+### Added
+
+- Archivo de prueba colaborativa.
+
+### Changed
+
+- TASK-TEST-001 pasó a IN_PROGRESS.
+
+### Integration
+
+- Pull Request pendiente.
