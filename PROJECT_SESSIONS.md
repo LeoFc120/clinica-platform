@@ -91,6 +91,68 @@ Estado final:
 
 ---
 
+## SESSION-TEST-001
+
+Fecha:
+2026-09-20
+
+Integrante:
+Charbel
+
+Rol:
+Base de datos / Prisma
+
+Módulo:
+Gestión del equipo
+
+TASK-ID:
+TASK-TEST-001
+
+Branch:
+docs/team-collaboration-test
+
+Objetivo:
+Comprobar el flujo de colaboración.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+
+- identificación mediante Gemini;
+- consulta de tarea;
+- creación de branch;
+- modificación documental.
+
+Archivos modificados:
+
+- docs/team-collaboration-test.md
+- PROJECT_TASKS.md
+- PROJECT_SESSIONS.md
+- PROJECT_CHANGELOG.md
+
+Pruebas:
+
+- branch verificada;
+- git status verificado.
+
+Problemas:
+Ninguno.
+
+Bloqueos:
+Ninguno.
+
+Pendientes:
+
+- commit;
+- push;
+- Pull Request;
+- revisión;
+- merge.
+
+Estado final:
+IN_PROGRESS
+
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.

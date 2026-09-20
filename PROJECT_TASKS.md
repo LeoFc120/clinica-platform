@@ -39,7 +39,7 @@ Rol:
 Arquitectura / Integración
 
 Estado:
-READY
+IN_PROGRESS
 
 Prioridad:
 HIGH
