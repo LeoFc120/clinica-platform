@@ -209,7 +209,7 @@ Fecha:
 2026-09-20
 
 Integrante:
-Leopoldo Fuentes Cruz
+Leopoldo 
 
 Rol:
 Arquitectura / Integración
@@ -291,8 +291,83 @@ Pendiente de aprobación (Review required).
 
 Estado final:
 REVIEW
--------------------------------------------------
+------------------------------------------------
+## SESSION-002
 
+Fecha:
+2026-09-20
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Infraestructura / Backend
+
+TASK-ID:
+TASK-001
+
+Branch:
+fix/backend-build
+
+Objetivo de la sesión:
+Resolver el error de compilación TypeScript en el entorno del servidor (BLOCK-001) para poder generar el build de producción.
+
+Estado inicial:
+IN_PROGRESS
+
+Trabajo realizado:
+- Creación de `backend/tsconfig.json` para aislar el compilador y evitar fugas hacia el frontend.
+- Migración a módulos ECMAScript (`"type": "module"`) en `package.json` para resolver conflictos de `verbatimModuleSyntax`.
+- Separación estricta de importación de valores y tipos en `server.ts`.
+- Corrección de tipado estricto en la propiedad URL de `prisma7.config.ts`.
+- Renombrado y ajuste de `jest.config.cjs` para forzar la compatibilidad con CommonJS durante la ejecución de pruebas, sobrescribiendo temporalmente las reglas estrictas de ESM.
+
+Archivos modificados:
+- `backend/package.json`
+- `backend/tsconfig.json` (nuevo)
+- `backend/src/server.ts`
+- `backend/prisma7.config.ts`
+- `backend/jest.config.cjs` (renombrado de .js)
+
+Pruebas realizadas:
+- Ejecución local de `npm run build`.
+- Ejecución local de `npm run test`.
+
+Resultado de pruebas:
+- Build generado exitosamente en `dist/` sin errores.
+- Tests ejecutados y pasados con éxito.
+
+Problemas encontrados:
+- El compilador `tsc` intentaba compilar la carpeta de React.
+- Discordancia entre sistema de módulos CommonJS y la sintaxis ES Modules.
+- Incompatibilidad nativa de Jest con el entorno estricto ECMAScript.
+
+Bloqueos:
+Ninguno. (Se resuelve la compilación general del backend y se levanta el BLOCK-001 original).
+
+Decisiones tomadas:
+- Implementar configuración `NodeNext` en TypeScript para el backend.
+- Aislar configuración de módulos de Jest en formato `.cjs` para evitar reescribir todo el entorno de pruebas a ESM experimental.
+
+Pendientes:
+- Pull Request, Review y Merge.
+- Actualizar `PROJECT_TASKS.md` a DONE.
+
+Siguiente acción:
+- Subir rama y solicitar Code Review a Backend.
+
+Commit:
+- fix(backend): resolver conflictos de modulos, tsconfig y jest para build
+
+Pull Request:
+- Pendiente.
+
+Estado final:
+REVIEW
+------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
