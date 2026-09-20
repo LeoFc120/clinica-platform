@@ -76,7 +76,7 @@ Backup:
 Pendiente
 
 Estado:
-READY
+DONE
 
 Prioridad:
 HIGH

@@ -114,25 +114,7 @@ PENDING
 
 # BLOQUEOS
 
-## BLOCK-001
 
-Descripción:
-Problema de configuración TypeScript detectado en el build del backend.
-
-Estado:
-OPEN
-
-Responsable:
-Leopoldo Fuentes Cruz
-
-Prioridad:
-HIGH
-
-Notas:
-Debe resolverse mediante una rama fix independiente sin modificar
-funcionalidades no relacionadas.
-
----
 
 # TRABAJO ACTUAL
 
