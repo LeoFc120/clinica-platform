@@ -28,7 +28,7 @@ jobs:
         uses: tj-actions/changed-files@v44
         with:
           files: |
-            **/*.{ts,tsx,js,jsx,json,md,prisma}
+            **/*.{ts,tsx,js,jsx,json,prisma}
 
       - name: Verificar formato solo en archivos modificados
         if: steps.changed-files.outputs.any_changed == 'true'
