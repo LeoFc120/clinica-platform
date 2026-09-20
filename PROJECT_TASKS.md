@@ -1,4 +1,5 @@
 # Tareas
+
 ## Estados permitidos
 
 - PENDING
@@ -100,13 +101,13 @@ Archivos esperados:
 
 Criterios de aceptación:
 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ]
+- [ ]
+- [ ]
 
 Pruebas requeridas:
 
-- [ ] 
+- [ ]
 
 PR:
 

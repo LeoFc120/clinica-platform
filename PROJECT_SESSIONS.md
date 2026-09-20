@@ -53,33 +53,33 @@ Estado inicial:
 
 Trabajo realizado:
 
-- 
+-
 
 Archivos modificados:
 
-- 
+-
 
 Pruebas realizadas:
 
-- 
+-
 
 Resultado de pruebas:
 
 Problemas encontrados:
 
-- 
+-
 
 Bloqueos:
 
-- 
+-
 
 Decisiones tomadas:
 
-- 
+-
 
 Pendientes:
 
-- 
+-
 
 Siguiente acción:
 
