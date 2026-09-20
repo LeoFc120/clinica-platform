@@ -12,16 +12,27 @@ jobs:
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Obligatorio para poder comparar commits y ramas
 
       - name: Configurar Node.js 24
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
-      - name: Instalar dependencias raíz y verificar formato
-        run: |
-          npm install
-          npx prettier --check "**/*.{ts,tsx,js,jsx,json,md,prisma}"
+      - name: Instalar dependencias raíz
+        run: npm install
+
+      - name: Obtener archivos modificados
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            **/*.{ts,tsx,js,jsx,json,md,prisma}
+
+      - name: Verificar formato solo en archivos modificados
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: npx prettier --check ${{ steps.changed-files.outputs.all_changed_files }}
 
       - name: Instalar dependencias del backend y ejecutar pruebas de API
         run: |
