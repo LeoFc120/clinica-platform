@@ -30,6 +30,39 @@
 
 ## TASK-001
 
+## TASK-001
+Título: Resolver compilación del backend
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Arquitectura / Integración
+
+Backup: Pendiente
+
+Estado: DONE
+
+Prioridad: HIGH
+
+Tipo: FIX
+
+Branch: fix/backend-build
+
+Dependencias: Ninguna
+
+Descripción: Aislar el alcance del compilador TypeScript del backend y resolver conflictos de módulos CommonJS/ESM.
+
+Criterios de aceptación:
+
+- [x] Backend compila sin errores hacia dist/.
+- [x] No hay fuga de compilación hacia el frontend.
+- [x] Pruebas ejecutan correctamente.
+- [x] Pipeline CI en verde.
+
+Evidencia:
+- PR #11 fusionado a develop.
+- Build generado exitosamente.
+
+
 ## TASK-TEST-001
 
 Título:

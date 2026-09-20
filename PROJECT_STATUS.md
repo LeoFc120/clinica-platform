@@ -105,7 +105,7 @@ Frontend build:
 PASS
 
 Backend build:
-PENDING
+PASS
 
 Pruebas de integración:
 PENDING
