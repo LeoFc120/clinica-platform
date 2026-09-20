@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,prisma}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,prisma}\""
   },
   "repository": {
     "type": "git",

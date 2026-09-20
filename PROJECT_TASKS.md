@@ -30,17 +30,53 @@
 
 ## TASK-001
 
+## TASK-TEST-001
+
 Título:
-Resolver compilación del backend
+Prueba del flujo colaborativo del equipo
 
 Responsable:
-Leopoldo Fuentes Cruz
+Charbel
 
-Rol:
-Arquitectura / Integración
+Backup:
+Leopoldo
 
 Estado:
-IN_PROGRESS
+DONE
+
+Branch:
+docs/team-collaboration-test
+
+PR:
+#8
+
+Resultado:
+Prueba colaborativa completada.
+
+Evidencia:
+
+- branch correcta;
+- commit correcto;
+- push correcto;
+- Pull Request #8;
+- review realizada;
+- PR fusionado a develop.
+
+---
+
+## TASK-002
+
+Título:
+Corregir validación de formato del pipeline CI
+
+Responsable:
+Leopoldo
+
+Backup:
+Pendiente
+
+Estado:
+READY
 
 Prioridad:
 HIGH
@@ -49,24 +85,27 @@ Tipo:
 FIX
 
 Branch:
-fix/backend-build
+fix/ci-format-validation
 
 Dependencias:
 Ninguna
 
 Descripción:
-Resolver el problema de compilación TypeScript previamente detectado
-en el backend sin realizar cambios funcionales no relacionados.
+
+Corregir el comportamiento del pipeline para evitar que
+errores de formato preexistentes en archivos no modificados
+bloqueen Pull Requests que no los afectan.
 
 Criterios de aceptación:
 
-- [ ] Backend tests PASS
-- [ ] Backend build PASS
-- [ ] Frontend build PASS
-- [ ] Prisma sin cambios no relacionados
-- [ ] Docker sin cambios no relacionados
-- [ ] Pull Request revisado
-- [ ] Documentación actualizada
+- [ ] CI ejecuta correctamente.
+- [ ] No bloquear PRs por errores preexistentes no relacionados.
+- [ ] No eliminar validaciones importantes.
+- [ ] No modificar funcionalidades.
+- [ ] Pull Request revisado.
+- [ ] Pipeline en verde.
+
+---
 
 ---
 
