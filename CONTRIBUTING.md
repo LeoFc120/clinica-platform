@@ -1065,3 +1065,88 @@ La estabilidad del proyecto tiene prioridad sobre la velocidad.
 ============================================================
 FIN DEL PROMPT MAESTRO OFICIAL
 ============================================================
+
+Consulta despues del primer prompt
+-----------------------------------------------------------
+Soy Naye.
+
+Haz PROJECT CHECK.
+
+Después ejecuta MY TASK.
+
+Quiero comenzar mi primera tarea.
+
+NO modifiques código todavía.
+
+Primero explícame:
+- qué me corresponde;
+- dependencia;
+- branch;
+- archivos esperados;
+- criterios de aceptación;
+- qué no debo tocar.
+-----------------------------------------------------------
+
+Soy Charbel.
+
+Haz PROJECT CHECK.
+
+Después MY TASK.
+
+Quiero comenzar mi primera tarea de Base de Datos.
+
+NO modifiques schema.prisma todavía.
+
+Primero dime qué trabajo puedo hacer sin cerrar
+el modelo definitivo.
+
+
+-----------------------------------------------------------
+
+Soy Natali.
+
+Haz PROJECT CHECK.
+
+Después MY TASK.
+
+Quiero comenzar mi tarea de Frontend.
+
+Primero revisa la estructura actual.
+
+NO modifiques archivos todavía.
+
+Dime exactamente qué archivos se deberían modificar
+y qué no debo tocar.
+
+--------------------------------------------
+
+Soy Juan.
+
+Haz PROJECT CHECK.
+
+Después MY TASK.
+
+Quiero comenzar mi tarea de Frontend.
+
+Primero revisa la estructura actual.
+
+NO modifiques archivos todavía.
+
+Dime exactamente qué archivos se deberían modificar
+y qué no debo tocar.
+
+---------------------------------------------------------
+Soy Roque.
+
+Haz PROJECT CHECK.
+
+Después MY TASK.
+
+Quiero comenzar mi tarea de Frontend.
+
+Primero revisa la estructura actual.
+
+NO modifiques archivos todavía.
+
+Dime exactamente qué archivos se deberían modificar
+y qué no debo tocar.
