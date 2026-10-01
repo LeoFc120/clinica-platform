@@ -29,7 +29,148 @@ BLOCKED
 CANCELLED
 
 ---
+## SESSION-003
 
+Fecha:
+2026-09-29
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Frontend
+
+TASK-ID:
+TASK-003
+
+Branch:
+feat/frontend-base-layout
+
+Objetivo de la sesión:
+Crear la plantilla estructural base (Layout) del frontend para estandarizar la interfaz de los módulos.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación del componente MainLayout con header y sidebar de navegación.
+- Definición de estilos base para el Layout.
+- Integración de MainLayout en App.tsx.
+
+Archivos modificados:
+- frontend/src/App.tsx
+- frontend/src/components/layout/MainLayout.tsx
+- frontend/src/components/layout/MainLayout.css
+
+Pruebas realizadas:
+- Compilación local del frontend mediante Vite.
+- Verificación visual de la estructura en el navegador.
+
+Resultado de pruebas:
+- El layout se renderiza correctamente.
+- La barra de navegación y el área de contenido dinámico responden al diseño establecido.
+
+Problemas encontrados:
+Ninguno.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+- Se implementó un layout clásico de dashboard (barra lateral izquierda y barra superior) estático para facilitar la posterior inyección de componentes por parte de los responsables de Frontend y Pacientes/Citas.
+
+Pendientes:
+- Realizar Pull Request.
+- Code Review por parte del equipo (Natali/Juan).
+- Merge hacia develop.
+
+Siguiente acción:
+- Crear Pull Request e iniciar TASK-004 para el esquema base de datos.
+
+Commit:
+feat(frontend): crear estructura base del layout con menu lateral y header
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+
+-----------------------------------------
+
+## SESSION-004
+
+Fecha:
+2026-09-29
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Base de datos / Prisma
+
+TASK-ID:
+TASK-004
+
+Branch:
+feat/database-schema-init
+
+Objetivo de la sesión:
+Definir el esquema inicial de la base de datos para habilitar el desarrollo del backend.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Definición de los modelos User, Patient y Appointment en schema.prisma.
+- Definición de Enums para Roles y Estados de Cita.
+- Creación y ejecución de la migración inicial (init_schema).
+
+Archivos modificados:
+- backend/prisma/schema.prisma
+- backend/prisma/migrations/20260929173813_init_schema/migration.sql
+
+Pruebas realizadas:
+- Ejecución de `npx prisma migrate dev`.
+- Sincronización exitosa con la base de datos PostgreSQL.
+
+Resultado de pruebas:
+- Base de datos actualizada con las 3 tablas principales y sus relaciones.
+
+Problemas encontrados:
+- Error P1012 al intentar migrar debido a que Prisma 7.10 ya no soporta la propiedad `url` directamente en el bloque datasource de `schema.prisma`.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+- Se eliminó la configuración de `url` de `schema.prisma` delegando la carga al archivo de configuración de Prisma 7 (`prisma7.config.ts`).
+- Se definieron los campos básicos requeridos para el MVP del sistema clínico.
+
+Pendientes:
+- Realizar Pull Request.
+- Code Review por parte de Charbel (Base de datos / Prisma).
+- Merge hacia develop.
+
+Siguiente acción:
+- Crear Pull Request en GitHub.
+
+Commit:
+feat(database): inicializar esquema de bd con tablas de usuarios, pacientes y citas
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+
+-----------------------------------------
 # PLANTILLA
 
 ## SESSION-XXX

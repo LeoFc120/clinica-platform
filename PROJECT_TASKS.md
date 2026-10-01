@@ -140,7 +140,88 @@ Criterios de aceptación:
 
 ---
 
----
+## TASK-003
+
+Título: Plantilla base del Frontend (Layout principal)
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Arquitectura / Integración
+
+Backup: Natali
+
+Estado: REVIEW
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/frontend-base-layout
+
+Dependencias: Ninguna
+
+Descripción: 
+Implementar la estructura visual base (MainLayout) del frontend, incluyendo barra superior (header) y menú lateral (sidebar), para que sirva como contenedor principal de todos los módulos del sistema.
+
+Archivos esperados:
+- MainLayout.tsx
+- MainLayout.css
+- App.tsx (modificado)
+
+Criterios de aceptación:
+- [x] El componente MainLayout renderiza un header y un sidebar.
+- [x] Se cuenta con un área dinámica para inyectar contenido (children).
+- [x] Compila sin errores.
+- [ ] PR revisado y aprobado por equipo de frontend.
+
+Pruebas requeridas:
+- [x] Renderizado local.
+
+PR: Pendiente
+
+Commit: feat(frontend): crear estructura base del layout con menu lateral y header
+
+---------------------------------------
+## TASK-004
+
+Título: Definición del esquema inicial de Base de Datos
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Arquitectura / Integración
+
+Backup: Charbel
+
+Estado: REVIEW
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/database-schema-init
+
+Dependencias: Ninguna
+
+Descripción: 
+Crear el esquema inicial de Prisma con las entidades core del sistema (Usuarios, Pacientes y Citas) para desbloquear el trabajo del equipo de Backend.
+
+Archivos esperados:
+- schema.prisma actualizado
+- Carpeta de migración SQL generada
+
+Criterios de aceptación:
+- [x] Los modelos User, Patient y Appointment están definidos con sus relaciones.
+- [x] La migración se ejecuta sin errores en PostgreSQL.
+- [ ] PR revisado y aprobado por el responsable de Base de Datos (Charbel).
+
+Pruebas requeridas:
+- [x] Ejecución de migración local sin errores de validación (Prisma CLI 7.10).
+
+PR: Pendiente
+
+Commit: feat(database): inicializar esquema de bd con tablas de usuarios, pacientes y citas
+
+---------------------------------------
 
 # PLANTILLA PARA NUEVAS TAREAS
 

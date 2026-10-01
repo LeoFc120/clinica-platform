@@ -21,18 +21,24 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         <aside className="layout-sidebar">
           <nav>
             <ul>
-              <li><a href="#dashboard">Dashboard</a></li>
-              <li><a href="#pacientes">Pacientes</a></li>
-              <li><a href="#citas">Citas Médicas</a></li>
-              <li><a href="#expedientes">Expedientes</a></li>
+              <li>
+                <a href="#dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a href="#pacientes">Pacientes</a>
+              </li>
+              <li>
+                <a href="#citas">Citas Médicas</a>
+              </li>
+              <li>
+                <a href="#expedientes">Expedientes</a>
+              </li>
             </ul>
           </nav>
         </aside>
 
         {/* Contenido principal inyectado */}
-        <main className="layout-content">
-          {children}
-        </main>
+        <main className="layout-content">{children}</main>
       </div>
     </div>
   );
