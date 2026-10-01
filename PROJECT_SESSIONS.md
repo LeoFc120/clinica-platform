@@ -94,10 +94,10 @@ Commit:
 feat(frontend): crear estructura base del layout con menu lateral y header
 
 Pull Request:
-Pendiente
+COMPLETED
 
 Estado final:
-REVIEW
+COMPLETED
 
 -----------------------------------------
 
@@ -165,10 +165,10 @@ Commit:
 feat(database): inicializar esquema de bd con tablas de usuarios, pacientes y citas
 
 Pull Request:
-Pendiente
+COMPLETED
 
 Estado final:
-REVIEW
+COMPLETED
 
 -----------------------------------------
 # PLANTILLA
