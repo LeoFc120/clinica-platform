@@ -220,6 +220,43 @@ Pruebas requeridas:
 PR: Pendiente
 
 Commit: feat(database): inicializar esquema de bd con tablas de usuarios, pacientes y citas
+---------------------------------------
+## TASK-005
+
+Título: Estructura base de enrutamiento API REST y Middlewares globales Express
+
+Responsable: Naye
+
+Rol: Backend / API
+
+Backup: Leopoldo Fuentes Cruz
+
+Estado: IN_PROGRESS
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/backend-api-routes
+
+Dependencias: TASK-001, TASK-004
+
+Descripción:
+Crear la estructura modular de directorios en el backend (routes, controllers, services, middlewares), configurar el enrutador principal /api/v1, implementar el endpoint GET /api/v1/health y el middleware global de captura de errores.
+
+Archivos esperados:
+- backend/src/middlewares/errorHandler.ts
+- backend/src/controllers/health.controller.ts
+- backend/src/routes/health.routes.ts
+- backend/src/routes/index.ts
+- backend/src/server.ts
+
+Criterios de aceptación:
+- [x] Directorios routes/, controllers/, middlewares/ estructurados.
+- [x] GET /api/v1/health responde 200 OK con payload JSON.
+- [x] Rutas inexistentes capturadas con respuesta 404 estructurada.
+- [x] npm run build ejecuta sin errores.
+- [x] npm test mantiene ejecutables las pruebas existentes.
 
 ---------------------------------------
 
