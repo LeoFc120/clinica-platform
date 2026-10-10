@@ -509,6 +509,79 @@ Pull Request:
 Estado final:
 REVIEW
 ------------------------------------------------
+
+## SESSION-005
+
+Fecha:
+2026-10-10
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Infraestructura / Backend
+
+TASK-ID:
+TASK-006
+
+Branch:
+feat/backend-prisma-cors
+
+Objetivo de la sesión:
+Configurar la instancia global de Prisma Client para evitar fugas de memoria y habilitar CORS en Express para permitir el consumo de la API desde el frontend.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Instalación de dependencias `cors`, `@types/cors` y `@prisma/client`.
+- Implementación del patrón Singleton para Prisma Client en `config/prisma.ts` usando `globalThis`.
+- Generación de los tipos locales con `npx prisma generate`.
+- Integración del middleware `cors` en `server.ts` autorizando el origen http://localhost:5173.
+
+Archivos modificados:
+- backend/package.json
+- backend/package-lock.json
+- backend/src/config/prisma.ts (Nuevo)
+- backend/src/server.ts
+
+Pruebas realizadas:
+- Ejecución de `npm run dev` sin errores de compilación TypeScript.
+- Prueba manual de Fetch API desde la consola del navegador en el puerto 5173 hacia el puerto 4000.
+
+Resultado de pruebas:
+- El servidor Prisma levanta correctamente sin errores P1012 ni de módulo no encontrado.
+- El navegador recibe y parsea la respuesta JSON de `/api/v1/health` correctamente sin bloqueos de política Same-Origin.
+
+Problemas encontrados:
+- Error ts(2305) por ausencia del cliente generado en `node_modules`.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+- Se reemplazó `global` por `globalThis` en la declaración de la instancia de Prisma para cumplir con la configuración estricta de módulos NodeNext.
+
+Pendientes:
+- Pull Request.
+- Code Review por parte del equipo Backend (Naye).
+- Merge hacia develop.
+
+Siguiente acción:
+- Crear Pull Request en GitHub.
+
+Commit:
+feat(backend): integrar prisma client global y habilitar cors para frontend
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
