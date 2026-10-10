@@ -300,6 +300,48 @@ PR: Pendiente
 
 Commit: feat(backend): integrar prisma client global y habilitar cors para frontend
 ---------------------------------------
+## TASK-007
+
+Título: Módulo de Pacientes en Backend (Endpoints de Creación y Lectura)
+
+Responsable: Leopoldo Fuentes Cruz (o Naye)
+
+Rol: Backend / API
+
+Backup: Naye
+
+Estado: REVIEW
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/backend-patients-crud
+
+Dependencias: TASK-004, TASK-005, TASK-006
+
+Descripción:
+Implementar el controlador y las rutas para el recurso de pacientes. Se deben crear al menos dos endpoints funcionales que utilicen el cliente global de Prisma para interactuar con la base de datos.
+
+Archivos esperados:
+- backend/src/controllers/patient.controller.ts
+- backend/src/routes/patient.routes.ts
+- backend/src/routes/index.ts (Actualizar para incluir las rutas de pacientes)
+
+Criterios de aceptación:
+- [x] Endpoint POST `/api/v1/patients` recibe datos JSON y crea un paciente en la base de datos.
+- [x] Endpoint GET `/api/v1/patients` devuelve la lista de pacientes registrados.
+- [x] Los controladores manejan los errores correctamente pasándolos al `errorHandler`.
+
+Pruebas requeridas:
+- [x] Creación exitosa de un paciente usando Thunder Client o Postman.
+- [x] Obtención de la lista de pacientes con código HTTP 200.
+
+PR: Pendiente
+
+Commit: feat(backend): crear rutas y controlador basico para pacientes
+---------------------------------------
+
 
 # PLANTILLA PARA NUEVAS TAREAS
 
