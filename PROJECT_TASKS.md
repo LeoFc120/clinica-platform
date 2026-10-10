@@ -341,8 +341,45 @@ PR: Pendiente
 
 Commit: feat(backend): crear rutas y controlador basico para pacientes
 ---------------------------------------
+## TASK-008
 
+Título: Configuración de la capa de servicios API en el Frontend
 
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Arquitectura / Integración
+
+Backup: Natali
+
+Estado: REVIEW
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/frontend-api-services
+
+Dependencias: TASK-003, TASK-007
+
+Descripción:
+Crear la configuración base del cliente HTTP y el servicio específico para el módulo de pacientes en React. Esto estandarizará la forma en que el frontend consume la API del backend y manejará las respuestas de forma centralizada.
+
+Archivos esperados:
+- frontend/src/services/api.ts (Configuración base)
+- frontend/src/services/patient.service.ts (Métodos GET y POST para pacientes)
+
+Criterios de aceptación:
+- [x] El archivo `api.ts` define la URL base hacia el backend.
+- [x] El `patient.service.ts` expone funciones asíncronas fuertemente tipadas para `createPatient` y `getPatients`.
+- [x] La compilación de TypeScript en el frontend pasa sin errores.
+
+Pruebas requeridas:
+- [x] Inyectar el servicio temporalmente en `App.tsx` o `MainLayout` para validar que el frontend recibe los datos del backend correctamente.
+
+PR: Pendiente
+
+Commit: feat(frontend): implementar capa de servicios api para modulo de pacientes
+---------------------------------------
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX
