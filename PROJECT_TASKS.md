@@ -380,6 +380,45 @@ PR: Pendiente
 
 Commit: feat(frontend): implementar capa de servicios api para modulo de pacientes
 ---------------------------------------
+## TASK-009
+
+Título: Interfaz de Tabla de Pacientes (UI)
+
+Responsable: Natali (o Juan)
+
+Rol: Frontend / UI
+
+Backup: Juan (o Natali)
+
+Estado: PENDING
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/frontend-patients-table
+
+Dependencias: TASK-008
+
+Descripción:
+Crear la vista principal del módulo de pacientes. Se debe implementar una tabla en React que consuma el servicio `PatientService.getAll()` para listar los pacientes registrados en la base de datos.
+
+Archivos esperados:
+- frontend/src/pages/Patients/PatientsPage.tsx (o la ruta correspondiente)
+- frontend/src/components/Patients/PatientsTable.tsx
+
+Criterios de aceptación:
+- [ ] La vista renderiza una tabla con las columnas: Nombre, Apellidos, Fecha de Nacimiento, Teléfono y Email.
+- [ ] El componente maneja estados de carga (loading spinner/texto) mientras espera la respuesta del backend.
+- [ ] Se muestran los datos reales provenientes de la base de datos usando `PatientService.getAll()`.
+
+Pruebas requeridas:
+- [ ] Validar visualmente que el paciente de prueba ("Carlos Mendoza") aparece correctamente en la tabla al cargar la pantalla.
+
+PR: Pendiente
+
+Commit: Pendiente
+---------------------------------------
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX
