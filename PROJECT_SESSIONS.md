@@ -647,7 +647,57 @@ Siguiente acción:
 
 Estado final:
 REVIEW
+------------------------------------------------
+## SESSION-007
 
+Fecha:
+2026-10-10
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Frontend / Servicios API
+
+TASK-ID:
+TASK-008
+
+Branch:
+feat/frontend-api-services
+
+Objetivo de la sesión:
+Crear la capa de servicios HTTP en React para estandarizar el consumo de la API del backend, eliminando URLs quemadas en los componentes.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación de `api.ts` con la URL base del servidor y un wrapper sobre `fetch` para manejo centralizado de peticiones y errores.
+- Creación de `patient.service.ts` definiendo las interfaces TypeScript (`Patient`, `CreatePatientDTO`) y los métodos `getAll` y `create`.
+- Prueba de integración exitosa inyectando el servicio en la carga inicial de la aplicación.
+
+Archivos modificados/creados:
+- frontend/src/services/api.ts (Nuevo)
+- frontend/src/services/patient.service.ts (Nuevo)
+- frontend/src/App.tsx (Prueba temporal removida posteriormente)
+
+Pruebas realizadas:
+- Ejecución de `PatientService.getAll()` desde el ciclo de vida de React.
+
+Resultado de pruebas:
+- El frontend recuperó exitosamente los datos de PostgreSQL a través del backend, mostrando los registros en la consola del navegador.
+
+Pendientes:
+- PR y Merge a develop.
+
+Siguiente acción:
+- Asignar la creación de la interfaz de usuario (Tabla y Formulario de Pacientes) al equipo de Frontend.
+
+Estado final:
+REVIEW
 ------------------------------------------------
 # REGLAS
 
