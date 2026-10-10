@@ -582,6 +582,73 @@ Pendiente
 Estado final:
 REVIEW
 ------------------------------------------------
+## SESSION-006
+
+Fecha:
+2026-10-10
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Backend / Módulo Pacientes
+
+TASK-ID:
+TASK-007
+
+Branch:
+feat/backend-patients-crud
+
+Objetivo de la sesión:
+Implementar el controlador y rutas iniciales para el módulo de Pacientes (CRUD básico: Creación y Lectura) utilizando Prisma Client.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación de `patient.controller.ts` con métodos `createPatient` y `getPatients`.
+- Configuración de `patient.routes.ts` y registro en el enrutador principal `index.ts`.
+- Ajuste del esquema de importación de tipos en TypeScript (verbatimModuleSyntax).
+- Actualización de la instancia de Prisma en `prisma.ts` integrando `@prisma/adapter-pg` y el `Pool` nativo de `pg` para resolver conflictos de conexión.
+- Corrección de credenciales en el archivo `.env` tomando como base `docker-compose.yml`.
+
+Archivos modificados/creados:
+- backend/.env
+- backend/src/config/prisma.ts
+- backend/src/controllers/patient.controller.ts (Nuevo)
+- backend/src/routes/patient.routes.ts (Nuevo)
+- backend/src/routes/index.ts
+- backend/package.json
+
+Pruebas realizadas:
+- Petición POST vía Thunder Client a `/api/v1/patients` enviando un payload JSON válido.
+- Petición GET vía Thunder Client a `/api/v1/patients` para listar registros.
+
+Resultado de pruebas:
+- POST exitoso (201 Created) insertando el registro en PostgreSQL.
+- GET exitoso (200 OK) retornando el arreglo de pacientes.
+
+Problemas encontrados:
+- Prisma arrojó error de instanciación por requerir un adaptador de base de datos nativo.
+- Rechazo de conexión a PostgreSQL por credenciales inválidas (Error SASL).
+
+Decisiones tomadas:
+- Se implementó `pg` y `@prisma/adapter-pg` como motor de conexión explícito.
+- Se ajustaron los campos del controlador para empatar estrictamente con la definición de `schema.prisma`.
+
+Pendientes:
+- PR y Merge a develop.
+
+Siguiente acción:
+- Code Review.
+
+Estado final:
+REVIEW
+
+------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
