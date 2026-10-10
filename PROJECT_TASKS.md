@@ -259,6 +259,47 @@ Criterios de aceptación:
 - [x] npm test mantiene ejecutables las pruebas existentes.
 
 ---------------------------------------
+## TASK-006
+
+Título: Integración de Prisma Client y CORS en el servidor Express
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Arquitectura / Integración
+
+Backup: Naye
+
+Estado: REVIEW
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/backend-prisma-cors
+
+Dependencias: TASK-004, TASK-005
+
+Descripción:
+Instanciar el cliente global de Prisma (Singleton) para evitar el agotamiento de conexiones a la base de datos y configurar el middleware CORS en Express para permitir peticiones desde el frontend (puerto 5173).
+
+Archivos esperados:
+- backend/src/config/prisma.ts
+- backend/src/server.ts (modificado)
+- backend/package.json (dependencias cors)
+
+Criterios de aceptación:
+- [x] Prisma Client exportado como instancia única.
+- [x] CORS configurado y aceptando peticiones del origen del frontend.
+- [x] El servidor compila y ejecuta sin errores.
+
+Pruebas requeridas:
+- [x] Ejecutar el servidor y validar que no haya errores de instancia.
+- [x] Validación cruzada de Fetch API desde el navegador.
+
+PR: Pendiente
+
+Commit: feat(backend): integrar prisma client global y habilitar cors para frontend
+---------------------------------------
 
 # PLANTILLA PARA NUEVAS TAREAS
 
