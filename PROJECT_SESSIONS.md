@@ -699,6 +699,53 @@ Siguiente acción:
 Estado final:
 REVIEW
 ------------------------------------------------
+## SESSION-008
+
+Fecha:
+2026-10-13
+
+Integrante:
+Leopoldo Fuentes Cruz (Cubriendo UI)
+
+Rol:
+Frontend / UI
+
+Módulo:
+Frontend / Pacientes
+
+TASK-ID:
+TASK-009
+
+Branch:
+feat/frontend-patients-table
+
+Objetivo de la sesión:
+Crear la vista principal de pacientes y la tabla de datos consumiendo el `PatientService`.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación de `PatientsTable.tsx` para renderizado puramente visual de los datos.
+- Creación de `PatientsPage.tsx` para manejar el estado (loading, error, data) y consumir la API en la carga del componente.
+- Integración de la vista en el enrutador/layout principal (`App.tsx`).
+- Resolución de conflictos de importación de tipos (Type-only imports) bajo `verbatimModuleSyntax`.
+
+Archivos modificados/creados:
+- frontend/src/components/layout/Patients/PatientsPage.tsx (Nuevo)
+- frontend/src/components/layout/Patients/PatientsTable.tsx (Nuevo)
+- frontend/src/App.tsx
+
+Pruebas realizadas:
+- Renderizado con base de datos vacía (Manejo de Empty State).
+- Renderizado con datos reales inyectados vía backend (Thunder Client).
+
+Resultado de pruebas:
+- La tabla muestra correctamente la información y formatea las fechas.
+
+Estado final:
+REVIEW
+------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
