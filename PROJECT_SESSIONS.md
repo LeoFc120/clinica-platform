@@ -746,6 +746,52 @@ Resultado de pruebas:
 Estado final:
 REVIEW
 ------------------------------------------------
+## SESSION-009
+
+Fecha:
+2026-10-13
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Backend / API
+
+Módulo:
+Backend / Pacientes
+
+TASK-ID:
+TASK-010
+
+Branch:
+feat/backend-patients-update-delete
+
+Objetivo de la sesión:
+Finalizar el CRUD completo del módulo de pacientes implementando las operaciones de actualización y eliminación.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación de métodos `updatePatient` y `deletePatient` en `patient.controller.ts`.
+- Configuración de rutas PUT y DELETE con parámetros dinámicos `/:id` en `patient.routes.ts`.
+- Resolución de advertencia de tipos estricta en TypeScript utilizando aserción `as string` para el parámetro de ID.
+
+Archivos modificados:
+- backend/src/controllers/patient.controller.ts
+- backend/src/routes/patient.routes.ts
+
+Pruebas realizadas:
+- Ejecución de endpoint PUT vía Thunder Client para modificar datos de un paciente existente.
+- Ejecución de endpoint DELETE vía Thunder Client para borrar el paciente.
+- Verificación con endpoint GET de que los cambios persisten en PostgreSQL.
+
+Resultado de pruebas:
+- Todas las operaciones HTTP devolvieron los estados correctos y actualizaron/eliminaron los registros en la base de datos de manera exitosa.
+
+Estado final:
+REVIEW
+------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
