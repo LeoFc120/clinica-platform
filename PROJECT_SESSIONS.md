@@ -792,6 +792,51 @@ Resultado de pruebas:
 Estado final:
 REVIEW
 ------------------------------------------------
+## SESSION-010
+
+Fecha:
+2026-10-13
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Frontend / UI
+
+Módulo:
+Frontend / Pacientes
+
+TASK-ID:
+TASK-011
+
+Branch:
+feat/frontend-patient-form
+
+Objetivo de la sesión:
+Crear formulario interactivo en React para registrar pacientes de forma gráfica y conectarlo con la API.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación de componente `PatientForm.tsx` con manejo de estado local para los inputs del usuario.
+- Actualización de `PatientsPage.tsx` para controlar la visibilidad del formulario vs la tabla.
+- Integración de `PatientService.create()` en el evento submit del formulario.
+- Recarga automática de los datos en la tabla tras una inserción exitosa.
+
+Archivos modificados/creados:
+- frontend/src/components/layout/Patients/PatientForm.tsx (Nuevo)
+- frontend/src/components/layout/Patients/PatientsPage.tsx
+
+Pruebas realizadas:
+- Llenado y envío del formulario desde la UI del navegador.
+
+Resultado de pruebas:
+- Paciente insertado correctamente en PostgreSQL y renderizado de forma automática en la tabla.
+
+Estado final:
+REVIEW
+------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.

@@ -460,6 +460,40 @@ PR: Pendiente
 
 Commit: Pendiente
 ---------------------------------------
+## TASK-011
+
+Título: Formulario de Registro de Pacientes (Frontend)
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Frontend / UI
+
+Backup: Natali
+
+Estado: PENDING
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/frontend-patient-form
+
+Dependencias: TASK-009, TASK-010
+
+Descripción:
+Crear el componente del formulario para registrar nuevos pacientes desde la interfaz gráfica. Debe consumir el método `create` del `PatientService`, manejar el estado de los inputs y actualizar la tabla automáticamente al guardar.
+
+Archivos esperados:
+- frontend/src/components/Patients/PatientForm.tsx (Nuevo)
+- frontend/src/pages/Patients/PatientsPage.tsx (Actualización)
+
+Criterios de aceptación:
+- [x] El formulario captura: Nombre, Apellidos, Fecha de Nacimiento, Teléfono y Email.
+- [x] Al enviar, ejecuta `PatientService.create()`.
+- [x] Si es exitoso, cierra el formulario y recarga la lista de pacientes en la tabla.
+
+PR: Pendiente
+---------------------------------------
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX
