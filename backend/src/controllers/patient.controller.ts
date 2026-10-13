@@ -31,3 +31,41 @@ export const getPatients = async (req: Request, res: Response, next: NextFunctio
     next(error);
   }
 };
+
+// Actualizar un paciente existente
+export const updatePatient = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id as string;
+    const data = req.body;
+
+    const updatedPatient = await prisma.patient.update({
+      where: { id },
+      data,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: updatedPatient,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Eliminar un paciente
+export const deletePatient = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id as string;
+
+    await prisma.patient.delete({
+      where: { id },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Paciente eliminado correctamente',
+    });
+  } catch (error) {
+    next(error);
+  }
+};

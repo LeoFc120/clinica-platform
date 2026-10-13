@@ -419,6 +419,47 @@ PR: Pendiente
 
 Commit: Pendiente
 ---------------------------------------
+## TASK-010
+
+Título: Completar CRUD de Pacientes en Backend (Update & Delete)
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Backend / API
+
+Backup: Naye
+
+Estado: PENDING
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/backend-patients-update-delete
+
+Dependencias: TASK-007
+
+Descripción:
+Implementar los endpoints restantes para el recurso de pacientes (PUT y DELETE) en el controlador y las rutas, asegurando que se actualicen y eliminen registros por su ID mediante Prisma Client.
+
+Archivos esperados:
+- backend/src/controllers/patient.controller.ts
+- backend/src/routes/patient.routes.ts
+
+Estado: REVIEW
+
+Criterios de aceptación:
+- [x] Endpoint PUT `/api/v1/patients/:id` actualiza los datos de un paciente existente.
+- [x] Endpoint DELETE `/api/v1/patients/:id` elimina un paciente de la base de datos.
+
+Pruebas requeridas:
+- [x] Actualizar un paciente desde Thunder Client y verificar código 200.
+- [x] Eliminar un paciente desde Thunder Client y verificar código 204 o 200.
+
+PR: Pendiente
+
+Commit: Pendiente
+---------------------------------------
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX
