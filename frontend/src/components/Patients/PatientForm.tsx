@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PatientService } from '../../../services/patient.service';
+import { PatientService } from '../../services/patient.service';
 
 interface PatientFormProps {
   onCancel: () => void;

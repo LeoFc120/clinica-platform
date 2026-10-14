@@ -1,4 +1,4 @@
-import type { Patient } from '../../../services/patient.service';
+import type { Patient } from '../../services/patient.service';
 
 interface PatientsTableProps {
   patients: Patient[];

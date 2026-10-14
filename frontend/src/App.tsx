@@ -1,5 +1,5 @@
 import { MainLayout } from './components/layout/MainLayout';
-import { PatientsPage } from './components/layout/Patients/PatientsPage';
+import { PatientsPage } from './pages/Patients/PatientsPage';
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
-import { type Patient, PatientService } from '../../../services/patient.service';
-import { PatientsTable } from './PatientsTable';
-import { PatientForm } from './PatientForm'; // <-- Importamos el nuevo formulario
+import { type Patient, PatientService } from '../../services/patient.service';
+import { PatientsTable } from '../../components/Patients/PatientsTable';
+import { PatientForm } from '../../components/Patients/PatientForm';
 
 export const PatientsPage = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
