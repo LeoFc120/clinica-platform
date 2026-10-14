@@ -494,6 +494,43 @@ Criterios de aceptación:
 
 PR: Pendiente
 ---------------------------------------
+## TASK-012
+
+Título: Reorganizar Arquitectura de Carpetas del Frontend (Pages & Components)
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Frontend / Architecture
+
+Backup: Juan
+
+Estado: PENDING
+
+Prioridad: MEDIUM
+
+Tipo: REFACTOR
+
+Branch: refactor/frontend-architecture
+
+Dependencias: TASK-009, TASK-011
+
+Descripción:
+Separar responsabilidades en el frontend moviendo las vistas a `src/pages/` y los componentes reutilizables a `src/components/`, ajustando las rutas de importación relativas.
+
+Archivos esperados:
+- frontend/src/pages/Patients/PatientsPage.tsx
+- frontend/src/components/Patients/PatientsTable.tsx
+- frontend/src/components/Patients/PatientForm.tsx
+- frontend/src/App.tsx
+
+Criterios de aceptación:
+- [x] La vista de pacientes reside en `src/pages/Patients/`.
+- [x] Los componentes `PatientsTable` y `PatientForm` residen en `src/components/Patients/`.
+- [x] Todas las rutas de importación en TypeScript/React compilan sin errores.
+- [x] La aplicación renderiza y funciona exactamente igual en el navegador.
+
+PR: Pendiente
+---------------------------------------
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX

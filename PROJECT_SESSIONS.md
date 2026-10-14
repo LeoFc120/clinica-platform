@@ -837,6 +837,54 @@ Resultado de pruebas:
 Estado final:
 REVIEW
 ------------------------------------------------
+## SESSION-011
+
+Fecha:
+2026-10-14
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Frontend / Architecture
+
+Módulo:
+Frontend / Arquitectura
+
+TASK-ID:
+TASK-012
+
+Branch:
+refactor/frontend-architecture
+
+Objetivo de la sesión:
+Reorganizar la estructura de carpetas del frontend separando vistas principales (`src/pages/`) y componentes reutilizables (`src/components/`).
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación de la estructura `src/pages/Patients/` para alojar `PatientsPage.tsx`.
+- Reubicación de `PatientsTable.tsx` y `PatientForm.tsx` en `src/components/Patients/`.
+- Actualización de todas las rutas relativas de importación en TypeScript/React.
+- Verificación del renderizado sin errores en la interfaz web.
+
+Archivos modificados/movidos:
+- frontend/src/pages/Patients/PatientsPage.tsx
+- frontend/src/components/Patients/PatientsTable.tsx
+- frontend/src/components/Patients/PatientForm.tsx
+- frontend/src/App.tsx
+
+Pruebas realizadas:
+- Compilación limpia en Vite.
+- Verificación visual de navegación y renderizado del directorio de pacientes en el navegador.
+
+Resultado de pruebas:
+- La aplicación funciona exactamente igual pero con una arquitectura desacoplada y mantenible.
+
+Estado final:
+REVIEW
+------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
