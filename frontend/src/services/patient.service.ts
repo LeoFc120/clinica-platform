@@ -19,7 +19,7 @@ export const PatientService = {
   // Obtener todos los pacientes
   getAll: async (): Promise<Patient[]> => {
     const response = await apiFetch('/patients');
-    return response.data; // Recuerda que tu backend devuelve { status: 'success', data: [...] }
+    return response.data;
   },
 
   // Crear un nuevo paciente
@@ -29,5 +29,21 @@ export const PatientService = {
       body: JSON.stringify(patient),
     });
     return response.data;
+  },
+
+  // Actualizar un paciente existente
+  update: async (id: string, patient: Partial<CreatePatientDTO>): Promise<Patient> => {
+    const response = await apiFetch(`/patients/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(patient),
+    });
+    return response.data;
+  },
+
+  // Eliminar un paciente
+  delete: async (id: string): Promise<void> => {
+    await apiFetch(`/patients/${id}`, {
+      method: 'DELETE',
+    });
   },
 };
