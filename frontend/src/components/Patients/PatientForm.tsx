@@ -1,12 +1,17 @@
-import { useState } from 'react';
-import { PatientService } from '../../services/patient.service';
+import { useState, useEffect } from 'react';
+import {
+  type Patient,
+  PatientService,
+  type CreatePatientDTO,
+} from '../../services/patient.service';
 
 interface PatientFormProps {
+  patientToEdit?: Patient | null;
   onCancel: () => void;
   onSuccess: () => void;
 }
 
-export const PatientForm = ({ onCancel, onSuccess }: PatientFormProps) => {
+export const PatientForm = ({ patientToEdit, onCancel, onSuccess }: PatientFormProps) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -16,6 +21,18 @@ export const PatientForm = ({ onCancel, onSuccess }: PatientFormProps) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (patientToEdit) {
+      setFormData({
+        firstName: patientToEdit.firstName,
+        lastName: patientToEdit.lastName,
+        dateOfBirth: patientToEdit.dateOfBirth ? patientToEdit.dateOfBirth.split('T')[0] : '',
+        phone: patientToEdit.phone || '',
+        email: patientToEdit.email || '',
+      });
+    }
+  }, [patientToEdit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -30,20 +47,23 @@ export const PatientForm = ({ onCancel, onSuccess }: PatientFormProps) => {
       setIsSubmitting(true);
       setError(null);
 
-      // Llamamos a la API que tú mismo construiste
-      await PatientService.create({
+      const payload: CreatePatientDTO = {
         firstName: formData.firstName,
         lastName: formData.lastName,
-        // Convertimos la fecha al formato ISO que espera Prisma
         dateOfBirth: new Date(formData.dateOfBirth).toISOString(),
         phone: formData.phone || null,
         email: formData.email || null,
-      });
+      };
 
-      // Si todo sale bien, avisamos a la página principal
+      if (patientToEdit) {
+        await PatientService.update(patientToEdit.id, payload);
+      } else {
+        await PatientService.create(payload);
+      }
+
       onSuccess();
     } catch (err: any) {
-      setError(err.message || 'Error al crear el paciente');
+      setError(err.message || 'Error al guardar el paciente');
     } finally {
       setIsSubmitting(false);
     }
@@ -51,7 +71,9 @@ export const PatientForm = ({ onCancel, onSuccess }: PatientFormProps) => {
 
   return (
     <div className="mb-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-xl font-semibold text-gray-800">Registrar Nuevo Paciente</h2>
+      <h2 className="mb-4 text-xl font-semibold text-gray-800">
+        {patientToEdit ? 'Editar Paciente' : 'Registrar Nuevo Paciente'}
+      </h2>
 
       {error && <div className="mb-4 rounded bg-red-100 p-3 text-red-700">{error}</div>}
 
@@ -125,7 +147,11 @@ export const PatientForm = ({ onCancel, onSuccess }: PatientFormProps) => {
             disabled={isSubmitting}
             className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
           >
-            {isSubmitting ? 'Guardando...' : 'Guardar Paciente'}
+            {isSubmitting
+              ? 'Guardando...'
+              : patientToEdit
+                ? 'Actualizar Paciente'
+                : 'Guardar Paciente'}
           </button>
         </div>
       </form>

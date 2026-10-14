@@ -3,9 +3,11 @@ import type { Patient } from '../../services/patient.service';
 interface PatientsTableProps {
   patients: Patient[];
   isLoading: boolean;
+  onEdit: (patient: Patient) => void;
+  onDelete: (id: string) => void;
 }
 
-export const PatientsTable = ({ patients, isLoading }: PatientsTableProps) => {
+export const PatientsTable = ({ patients, isLoading, onEdit, onDelete }: PatientsTableProps) => {
   if (isLoading) {
     return (
       <div className="p-4 text-center text-gray-500">Cargando información de pacientes...</div>
@@ -40,6 +42,9 @@ export const PatientsTable = ({ patients, isLoading }: PatientsTableProps) => {
             <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
               Email
             </th>
+            <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
+              Acciones
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
@@ -59,6 +64,20 @@ export const PatientsTable = ({ patients, isLoading }: PatientsTableProps) => {
               </td>
               <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                 {patient.email || 'N/A'}
+              </td>
+              <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium space-x-2">
+                <button
+                  onClick={() => onEdit(patient)}
+                  className="text-blue-600 hover:text-blue-900 font-medium"
+                >
+                  Editar
+                </button>
+                <button
+                  onClick={() => onDelete(patient.id)}
+                  className="text-red-600 hover:text-red-900 font-medium"
+                >
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}
