@@ -1,0 +1,72 @@
+.records-container {
+  padding: 20px;
+}
+
+.records-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.patient-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.patient-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.patient-info p {
+  margin: 0;
+  color: #555;
+}
+
+.timeline {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.consultation-item {
+  border-left: 3px solid #2b3a8c;
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+
+.consultation-item h4 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.consultation-item span {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.consultation-item p {
+  margin-top: 8px;
+  color: #444;
+}
