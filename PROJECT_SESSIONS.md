@@ -1179,6 +1179,82 @@ Estado final:
 REVIEW
 ------------------------------------------------
 
+## SESSION-015
+
+Fecha:
+2026-10-16
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Integración / API REST
+
+TASK-ID:
+Bugfix (Derivado de TASK-014)
+
+Branch:
+feat/backend-pgadmin
+
+Objetivo de la sesión:
+Resolver errores de enrutamiento (404) y políticas de seguridad (CORS) para establecer la comunicación exitosa entre el repositorio Frontend y Backend.
+
+Estado inicial:
+IN PROGRESS
+
+Trabajo realizado:
+
+- Configuración de variable de entorno VITE_API_URL en el frontend apuntando al prefijo /api/v1.
+- Reubicación del middleware CORS en server.ts (backend) colocándolo antes de la declaración de rutas.
+- Verificación del flujo de datos End-to-End.
+
+Archivos modificados:
+
+- frontend/.env (Nuevo)
+- backend/src/server.ts
+
+Pruebas realizadas:
+
+- Envío de formulario POST desde React (puerto 5173).
+- Verificación de inserción de datos en PostgreSQL mediante PgAdmin (puerto 5050).
+
+Resultado de pruebas:
+
+- Conexión HTTP exitosa y persistencia de datos validada.
+
+Problemas encontrados:
+
+- El navegador bloqueaba las peticiones por políticas de CORS mal ubicadas.
+- El servidor devolvía 404 por falta del prefijo /v1 en la URL del frontend.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+
+- Se incluyó el fix de CORS en la misma rama de PgAdmin (feat/backend-pgadmin) por ser dependencias críticas para el entorno de desarrollo local.
+
+Pendientes:
+
+- Crear Pull Request de la rama feat/backend-pgadmin.
+
+Siguiente acción:
+
+- Solicitar Code Review.
+
+Commit:
+fix(api): reubicar y configurar politicas de cors
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+-----------------------------------------------
+
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
