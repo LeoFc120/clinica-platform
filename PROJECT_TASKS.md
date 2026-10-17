@@ -565,6 +565,43 @@ Criterios de aceptación:
 PR: Pendiente
 ---------------------------------------
 
+## TASK-014
+
+Título: Separación del repositorio Frontend
+Responsable: Leopoldo Fuentes Cruz
+Rol: Arquitectura / Integración
+Estado: DONE
+Prioridad: HIGH
+Tipo: CHORE
+Branch: chore/split-frontend-repo
+Descripción: Extraer la carpeta frontend/ hacia un nuevo repositorio de GitHub y limpiar el repositorio original.
+Criterios de aceptación:
+
+- [x] Código de frontend disponible en el nuevo repo.
+- [x] Repositorio de backend limpio.
+- [x] PR aprobado y fusionado a develop.
+      Evidencia: Pull Request #29 fusionado a develop.
+
+---
+
+## TASK-015
+
+Título: Integración de PgAdmin en Docker
+Responsable: Leopoldo Fuentes Cruz (Apoyo a Charbel)
+Rol: Arquitectura / Integración
+Estado: REVIEW
+Prioridad: MEDIUM
+Tipo: FEAT
+Branch: feat/backend-pgadmin
+Descripción: Actualizar el archivo docker-compose.yml para incluir el contenedor de PgAdmin.
+Criterios de aceptación:
+
+- [x] Servicio pgadmin definido en docker-compose.
+- [x] Accesible desde localhost:5050.
+- [x] No interfiere con la ejecución actual de la BD.
+
+---
+
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX

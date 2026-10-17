@@ -1038,6 +1038,147 @@ Estado final:
 REVIEW
 ------------------------------------------------
 
+## SESSION-013
+
+Fecha:
+2026-10-16
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Arquitectura General
+
+TASK-ID:
+TASK-014
+
+Branch:
+chore/split-frontend-repo
+
+Objetivo de la sesión:
+Extraer la carpeta frontend/ hacia un nuevo repositorio de GitHub y limpiar el repositorio original para adoptar la arquitectura Multirepo.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+
+- Creación de nuevo repositorio en GitHub (clinica-platform-frontend).
+- Inicialización y subida de la carpeta frontend al nuevo repositorio.
+- Eliminación de la carpeta frontend del repositorio original (backend).
+- Creación y merge del Pull Request #29.
+
+Archivos modificados:
+
+- Eliminación de la carpeta frontend/
+
+Pruebas realizadas:
+
+- Verificación de código en el nuevo repositorio.
+- Pipeline de CI ejecutado con éxito en backend.
+
+Problemas encontrados:
+Ninguno.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+
+- Se ejecutó la separación dictada en la DECISION-003.
+
+Pendientes:
+
+- Configurar el CI en el nuevo repositorio de frontend.
+
+Siguiente acción:
+
+- Continuar con la configuración de PgAdmin.
+
+Commit:
+chore(repo): separar frontend a repositorio independiente
+
+Pull Request:
+#29 (Fusionado)
+
+Estado final:
+COMPLETED
+
+---
+
+## SESSION-014
+
+Fecha:
+2026-10-16
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Infraestructura / Base de Datos
+
+TASK-ID:
+TASK-015
+
+Branch:
+feat/backend-pgadmin
+
+Objetivo de la sesión:
+Integrar PgAdmin mediante Docker para proporcionar una interfaz gráfica de administración para PostgreSQL.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+
+- Modificación de docker-compose.yml para agregar el servicio pgadmin4.
+- Configuración de credenciales de acceso por defecto (admin@clinica.com).
+- Mapeo de puerto 5050.
+
+Archivos modificados:
+
+- docker-compose.yml
+
+Pruebas realizadas:
+
+- Ejecución de `docker-compose down` y `docker-compose up -d`.
+- Acceso exitoso a la interfaz web en localhost:5050.
+
+Problemas encontrados:
+Ninguno.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+
+- Se implementó la DECISION-004 de usar PgAdmin en entorno Dockerizado para evitar instalaciones locales en los equipos de los desarrolladores.
+
+Pendientes:
+
+- Hacer commit y PR.
+- Que Charbel configure la conexión del servidor internamente en la interfaz.
+
+Siguiente acción:
+
+- Subir rama y solicitar Code Review.
+
+Commit:
+feat(backend): integrar servicio pgadmin en docker-compose
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+------------------------------------------------
+
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
