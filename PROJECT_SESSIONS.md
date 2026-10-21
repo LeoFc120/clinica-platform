@@ -1332,6 +1332,79 @@ Pendiente de Merge
 Estado final:
 REVIEW
 -----------------------------------------------
+## SESSION-017
+
+Fecha:
+2026-10-21
+
+Integrante:
+Naye
+
+Rol:
+Backend / API
+
+Módulo:
+Seguridad / Pacientes
+
+TASK-ID:
+TASK-016
+
+Branch:
+feat/backend-protect-routes
+
+Objetivo de la sesión:
+Proteger los endpoints del CRUD de pacientes en el backend integrando el middleware `verifyToken` para exigir autenticación mediante token JWT en todas las operaciones.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+
+- Se importó e integró el middleware `verifyToken` en el enrutador de pacientes (`patient.routes.ts`).
+- Se aplicó la validación de seguridad a los endpoints GET, POST, PUT y DELETE del recurso de pacientes.
+- Se verificó la correcta compilación de TypeScript mediante el comando `npm run build`.
+
+Archivos modificados:
+
+- backend/src/routes/patient.routes.ts
+
+Pruebas realizadas:
+
+- Validación de acceso mediante el cliente HTTP Bruno enviando un token JWT válido en el header de autorización (`Bearer Token`).
+
+Resultado de pruebas:
+
+- Respuesta HTTP 200 OK y entrega correcta del payload de pacientes al autenticarse de forma exitosa.
+- Bloqueo de peticiones no autorizadas o con tokens inválidos respondiendo con los códigos de error correspondientes.
+
+Problemas encontrados:
+Ninguno.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+
+- Se centralizó la protección de todas las rutas del recurso de pacientes para garantizar que ninguna operación del CRUD quede expuesta sin un token válido.
+
+Pendientes:
+
+- Subir los cambios a GitHub mediante commit y push.
+- Creación y apertura del Pull Request correspondiente hacia la rama develop.
+
+Siguiente acción:
+
+- Abrir el Pull Request en GitHub y esperar la revisión del equipo.
+
+Commit:
+feat(backend): proteger rutas de pacientes con middleware verifyToken
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+-----------------------------------------------------
 
 # REGLAS
 
