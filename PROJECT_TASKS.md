@@ -659,6 +659,35 @@ Criterios de aceptación:
 
 ---
 
+## TASK-016
+
+Título: Protección de rutas del CRUD de Pacientes mediante middleware JWT
+Responsable: Naye
+Rol: Backend / API
+Backup: Leopoldo Fuentes Cruz
+Estado: REVIEW
+Prioridad: HIGH
+Tipo: FEAT
+Branch: feat/backend-protect-routes
+Dependencias: TASK-007, TASK-013
+
+Descripción:
+Importar e integrar el middleware `verifyToken` en el enrutador de pacientes (`patient.routes.ts`) para exigir un token JWT válido en todas las peticiones (GET, POST, PUT, DELETE).
+
+Archivos esperados:
+- backend/src/routes/patient.routes.ts
+
+Criterios de aceptación:
+- [x] Middleware `verifyToken` importado y aplicado a las rutas de pacientes.
+- [x] Peticiones no autenticadas o con token inválido devuelven respuestas `401 Unauthorized` o `403 Forbidden`.
+- [x] Peticiones con header `Authorization: Bearer <token>` válido responden con `200 OK` o datos esperados.
+- [x] Compilación exitosa del backend con TypeScript (`npm run build`).
+
+Evidencia:
+- Validación local mediante Bruno respondiendo `200 OK` con datos de pacientes al enviar Bearer Token.
+- Rama `feat/backend-protect-routes` lista para Pull Request hacia `develop`.
+------
+
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX
