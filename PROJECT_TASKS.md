@@ -565,6 +565,63 @@ Criterios de aceptación:
 PR: Pendiente
 ---------------------------------------
 
+## TASK-013
+Título: Autenticación de Usuarios en Backend (JWT y Bcrypt)
+
+Responsable: Naye
+
+Rol: Backend / API
+
+Backup: Leopoldo Fuentes Cruz
+
+Estado: DONE
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/backend-auth-jwt
+
+Dependencias: TASK-004, TASK-005, TASK-006
+
+Descripción:
+Implementar el módulo completo de autenticación de usuarios en el backend utilizando contraseñas encriptadas con bcryptjs y emisión de tokens de acceso mediante jsonwebtoken (JWT). Se incluyen los controladores de registro y login, las rutas dedicadas en /api/v1/auth y el middleware de protección para verificar tokens en endpoints privados.
+
+Archivos esperados:
+
+backend/src/controllers/auth.controller.ts
+
+backend/src/routes/auth.routes.ts
+
+backend/src/middlewares/auth.middleware.ts
+
+backend/src/routes/index.ts (Actualizado para incluir /auth)
+
+backend/.env (Configuración de JWT_SECRET)
+
+Criterios de aceptación:
+
+[x] Endpoint POST /api/v1/auth/register recibe email, nombre, contraseña y rol, crea el usuario en PostgreSQL hasheando la clave y omitiendo la contraseña en la respuesta.
+
+[x] Endpoint POST /api/v1/auth/login valida credenciales y devuelve un token JWT firmado junto con los datos públicos del usuario.
+
+[x] Middleware verifyToken valida el header Authorization: Bearer <token> y protege rutas privadas.
+
+[x] Clave secreta JWT_SECRET correctamente aislada en variables de entorno.
+
+[x] El servidor Express inicia y compila sin errores TypeScript.
+
+Pruebas requeridas:
+
+[x] Registro de usuario exitoso mediante Bruno devuelviendo código HTTP 201 Created.
+
+[x] Inicio de sesión exitoso mediante Bruno devuelviendo código HTTP 200 OK con un token JWT válido.
+
+PR: Pendiente
+
+Commit: feat(auth): implement JWT registration, login and authentication middleware
+------------------------
+
 ## TASK-014
 
 Título: Separación del repositorio Frontend
