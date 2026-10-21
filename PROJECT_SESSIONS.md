@@ -1255,6 +1255,84 @@ Estado final:
 REVIEW
 -----------------------------------------------
 
+## SESSION-016
+
+Fecha:
+2026-10-20
+
+Integrante:
+Naye (Documentado en revisión por Leopoldo)
+
+Rol:
+Backend / API
+
+Módulo:
+Autenticación
+
+TASK-ID:
+TASK-013
+
+Branch:
+feat/backend-auth-jwt
+
+Objetivo de la sesión:
+Implementar el módulo completo de autenticación de usuarios utilizando contraseñas encriptadas con bcryptjs y emisión de tokens de acceso mediante JWT.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+
+- Se agregaron los endpoints POST `/api/v1/auth/register` y POST `/api/v1/auth/login`.
+- Se creó el middleware `verifyToken` para la protección de rutas privadas.
+- Se actualizaron las variables de entorno (`JWT_SECRET`) y el enrutador principal de la API.
+
+Archivos modificados:
+
+- backend/src/controllers/auth.controller.ts
+- backend/src/routes/auth.routes.ts
+- backend/src/middlewares/auth.middleware.ts
+- backend/src/routes/index.ts
+- backend/.env
+
+Pruebas realizadas:
+
+- Verificación del funcionamiento correcto de los endpoints de registro e inicio de sesión utilizando el cliente Bruno.
+
+Resultado de pruebas:
+
+- Registro exitoso con respuesta HTTP 201 Created.
+- Login exitoso con respuesta HTTP 200 OK y emisión de token válido.
+
+Problemas encontrados:
+Ninguno.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+
+- Se implementaron los estándares de la industria usando `bcryptjs` para el hashing de contraseñas y `jsonwebtoken` para la autorización sin estado (stateless).
+
+Pendientes:
+
+- Aprobación del PR por parte del líder técnico.
+- Merge a la rama develop.
+
+Siguiente acción:
+
+- Fusionar el código e iniciar el módulo de Citas Médicas.
+
+Commit:
+feat(auth): implement JWT registration, login and authentication middleware
+
+Pull Request:
+Pendiente de Merge
+
+Estado final:
+REVIEW
+-----------------------------------------------
+
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
