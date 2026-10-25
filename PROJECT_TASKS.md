@@ -731,6 +731,47 @@ Criterios de aceptación:
 PR: Pendiente
 ---------------------------------------------------------
 
+## TASK-018
+
+## TASK-018
+
+Título: Módulo de Citas en Backend (Endpoints y Controlador)
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Backend / API
+
+Backup: Naye
+
+Estado: REVIEW
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/backend-appointments-api
+
+Dependencias: TASK-017, TASK-016
+
+Descripción:
+Implementar el controlador y las rutas para el recurso de citas médicas (Appointments). Se deben crear los endpoints para agendar una cita (POST) y listar las citas (GET), protegiendo las rutas con el middleware de autenticación y vinculándolas con un doctor y un paciente.
+
+Archivos esperados:
+
+- backend/src/controllers/appointment.controller.ts (Nuevo)
+- backend/src/routes/appointment.routes.ts (Nuevo)
+- backend/src/routes/index.ts (Actualizado)
+
+Criterios de aceptación:
+
+- [x] Endpoint POST `/api/v1/appointments` crea una cita conectada a un `patientId` y `doctorId`.
+- [x] Endpoint GET `/api/v1/appointments` lista las citas incluyendo los datos del paciente (relación Prisma).
+- [x] Las rutas están protegidas mediante el middleware `verifyToken`.
+- [x] Los errores se manejan correctamente con `errorHandler`.
+
+PR: Pendiente
+--------------------------------------------------------
+
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX
