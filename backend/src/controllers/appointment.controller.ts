@@ -12,7 +12,7 @@ export const createAppointment = async (req: Request, res: Response, next: NextF
         reason,
         patientId,
         doctorId,
-        status: status || 'PENDING'
+        status: status || 'PENDING',
       },
     });
 
@@ -31,15 +31,15 @@ export const getAppointments = async (req: Request, res: Response, next: NextFun
     const appointments = await prisma.appointment.findMany({
       include: {
         patient: {
-          select: { firstName: true, lastName: true, phone: true } // Solo traemos datos relevantes
+          select: { firstName: true, lastName: true, phone: true }, // Solo traemos datos relevantes
         },
         doctor: {
-          select: { name: true, role: true }
-        }
+          select: { name: true, role: true },
+        },
       },
       orderBy: {
-        date: 'asc' // Ordenamos de la más próxima a la más lejana
-      }
+        date: 'asc', // Ordenamos de la más próxima a la más lejana
+      },
     });
 
     res.status(200).json({
