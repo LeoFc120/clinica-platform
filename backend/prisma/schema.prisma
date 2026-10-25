@@ -57,7 +57,7 @@ model Appointment {
 
   // Relaciones
   patientId String
-  patient   Patient @relation(fields: [patientId], references: [id])
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
 
   doctorId String
   doctor   User   @relation(fields: [doctorId], references: [id])

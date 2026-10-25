@@ -566,6 +566,7 @@ PR: Pendiente
 ---------------------------------------
 
 ## TASK-013
+
 Título: Autenticación de Usuarios en Backend (JWT y Bcrypt)
 
 Responsable: Naye
@@ -675,18 +676,60 @@ Descripción:
 Importar e integrar el middleware `verifyToken` en el enrutador de pacientes (`patient.routes.ts`) para exigir un token JWT válido en todas las peticiones (GET, POST, PUT, DELETE).
 
 Archivos esperados:
+
 - backend/src/routes/patient.routes.ts
 
 Criterios de aceptación:
+
 - [x] Middleware `verifyToken` importado y aplicado a las rutas de pacientes.
 - [x] Peticiones no autenticadas o con token inválido devuelven respuestas `401 Unauthorized` o `403 Forbidden`.
 - [x] Peticiones con header `Authorization: Bearer <token>` válido responden con `200 OK` o datos esperados.
 - [x] Compilación exitosa del backend con TypeScript (`npm run build`).
 
 Evidencia:
+
 - Validación local mediante Bruno respondiendo `200 OK` con datos de pacientes al enviar Bearer Token.
 - Rama `feat/backend-protect-routes` lista para Pull Request hacia `develop`.
-------
+
+---
+
+## TASK-017
+
+Título: Modelo de Base de Datos para Citas Médicas (Appointments)
+
+Responsable: Leopoldo Fuentes Cruz
+
+Rol: Backend / Database
+
+Backup: Charbel
+
+Estado: REVIEW
+
+Prioridad: HIGH
+
+Tipo: FEAT
+
+Branch: feat/backend-appointments-model
+
+Dependencias: TASK-004
+
+Descripción:
+Definir el modelo `Appointment` en Prisma, establecer la relación de uno a muchos con el modelo `Patient` (borrado en cascada) y generar la migración en PostgreSQL.
+
+Archivos esperados:
+
+- backend/prisma/schema.prisma
+- backend/prisma/migrations/ (nueva carpeta generada)
+
+Criterios de aceptación:
+
+- [x] El modelo `Appointment` contiene fecha, motivo y estado (enum).
+- [x] Relación establecida correctamente con `Patient`.
+- [x] Migración aplicada en la base de datos sin errores.
+- [x] Cliente Prisma regenerado con los nuevos tipos.
+
+PR: Pendiente
+---------------------------------------------------------
 
 # PLANTILLA PARA NUEVAS TAREAS
 
