@@ -1332,6 +1332,7 @@ Pendiente de Merge
 Estado final:
 REVIEW
 -----------------------------------------------
+
 ## SESSION-017
 
 Fecha:
@@ -1405,6 +1406,81 @@ Pendiente
 Estado final:
 REVIEW
 -----------------------------------------------------
+
+## SESSION-017
+
+Fecha:
+2026-10-24
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Backend / Database
+
+Módulo:
+Citas Médicas
+
+TASK-ID:
+TASK-017
+
+Branch:
+feat/backend-appointments-model
+
+Objetivo de la sesión:
+Preparar la base de datos para el módulo de Citas Médicas mediante la creación del modelo `Appointment` y sus relaciones.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+
+- Definición del enum `AppointmentStatus`.
+- Creación del modelo `Appointment` con relaciones hacia `Patient` (borrado en cascada) y `User` (como doctor).
+- Ejecución de migración SQL y regeneración del cliente de Prisma.
+
+Archivos modificados:
+
+- backend/prisma/schema.prisma
+- backend/prisma/migrations/ (migración generada)
+
+Pruebas realizadas:
+
+- Sincronización exitosa con PostgreSQL (`npx prisma migrate dev`).
+- Generación de tipos de TypeScript (`npx prisma generate`).
+
+Resultado de pruebas:
+
+- La base de datos está lista para recibir registros de citas con integridad referencial.
+
+Problemas encontrados:
+
+- Error P1001 de conexión inicial por contenedor Docker apagado, solucionado levantando la instancia.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+
+- Implementar relación con el modelo `User` para asignar un doctor a la cita, y configurar el borrado en cascada (`onDelete: Cascade`) en la relación con el paciente para evitar registros huérfanos.
+
+Pendientes:
+
+- Crear Pull Request a develop.
+
+Siguiente acción:
+
+- Iniciar la creación de controladores y rutas para la API de citas.
+
+Commit:
+feat(database): crear modelo y migracion para citas medicas
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+---------------------------------------------------
 
 # REGLAS
 
