@@ -1482,6 +1482,82 @@ Estado final:
 REVIEW
 ---------------------------------------------------
 
+## SESSION-018
+
+Fecha:
+2026-10-24
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Backend / API
+
+Módulo:
+Citas Médicas
+
+TASK-ID:
+TASK-018
+
+Branch:
+feat/backend-appointments-api
+
+Objetivo de la sesión:
+Implementar el controlador y el enrutador para las operaciones de lectura y escritura del módulo de Citas Médicas, aplicando protección de rutas y relaciones de base de datos.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+
+- Creación de `appointment.controller.ts` con funciones `createAppointment` y `getAppointments`.
+- Implementación de `appointment.routes.ts` con el middleware global `verifyToken`.
+- Inyección de relaciones (include) en la consulta GET para anidar datos de Paciente y Doctor.
+- Actualización de importaciones de tipos de Express usando `type` para respetar la sintaxis estricta de módulos.
+
+Archivos modificados/creados:
+
+- backend/src/controllers/appointment.controller.ts
+- backend/src/routes/appointment.routes.ts
+- backend/src/routes/index.ts
+
+Pruebas realizadas:
+
+- Autenticación de un usuario Doctor para generar un Bearer Token.
+- Petición POST fallida (500) validando correctamente la restricción de llave foránea de PostgreSQL.
+- Petición POST exitosa (201) conectando un `patientId` y `doctorId` reales.
+
+Resultado de pruebas:
+
+- La API recibe, procesa, vincula y guarda las citas correctamente en la base de datos protegiendo el acceso no autorizado.
+
+Problemas encontrados:
+
+- Error P1001 (Docker apagado) en la sesión anterior y error 500 por enviar una cadena de texto en lugar de un UUID válido.
+- Error ts(1484) por la regla `verbatimModuleSyntax` al importar `Request` y `Response`.
+
+Bloqueos:
+Ninguno. Resoluciones aplicadas en la misma sesión.
+
+Pendientes:
+
+- Subir rama y crear Pull Request.
+- Desarrollar la interfaz gráfica en el frontend para el consumo de estos endpoints.
+
+Siguiente acción:
+
+- Iniciar la conexión de Citas Médicas desde la interfaz de React.
+
+Commit:
+feat(backend): implementar controlador, rutas y proteccion jwt para citas medicas
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+---------------------------------------------------
+
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
