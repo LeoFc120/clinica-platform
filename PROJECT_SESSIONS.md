@@ -1557,7 +1557,78 @@ Pendiente
 Estado final:
 REVIEW
 ---------------------------------------------------
+## SESSION-019
 
+Fecha:
+2026-10-28
+
+Integrante:
+Naye
+
+Rol:
+Backend / API
+
+Módulo:
+Citas Médicas
+
+TASK-ID:
+TASK-019
+
+Branch:
+feat/backend-appointments-crud-complete
+
+Objetivo de la sesión:
+Completar e implementar los métodos faltantes del CRUD de Citas Médicas (`getAppointmentById`, `update`, `delete`), realizando pruebas de validación de esquemas y tipos en Bruno.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+
+- Actualización de `appointment.controller.ts` añadiendo los métodos de consulta por ID, actualización y eliminación de citas.
+- Integración de rutas en `appointment.routes.ts` protegiendo todos los endpoints con el middleware global `verifyToken`.
+- Manejo y validación de tipos enumerados (`AppointmentStatus`) correspondientes al modelo en Prisma.
+
+Archivos modificados/creados:
+
+- backend/src/controllers/appointment.controller.ts
+- backend/src/routes/appointment.routes.ts
+
+Pruebas realizadas:
+
+- Creación exitosa (`POST /api/v1/appointments`) vinculando un paciente y un doctor reales mediante sus respectivos UUIDs.
+- Actualización exitosa (`PUT /api/v1/appointments/:id`) modificando la razón de la consulta y estableciendo el estado a `COMPLETED`.
+- Eliminación exitosa (`DELETE /api/v1/appointments/:id`) borrando el registro de la base de datos de forma limpia.
+
+Resultado de pruebas:
+
+- El servidor procesa todo el ciclo del CRUD de citas sin errores y valida correctamente las llaves foráneas y los enums de Prisma.
+
+Problemas encontrados:
+
+- Error 500 inicial al intentar actualizar con un estado no contemplado en el enum (`CONFIRMED`), resuelto utilizando un estado válido (`COMPLETED`).
+
+Bloqueos:
+Ninguno.
+
+Pendientes:
+
+- Ejecutar compilación limpia (`npm run build`).
+- Subir rama a GitHub y crear el Pull Request hacia `develop`.
+
+Siguiente acción:
+
+- Crear Pull Request y avanzar con el consumo de la API desde el frontend.
+
+Commit:
+feat(backend): completar CRUD de citas medicas con getById, update y delete
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+---------------------------------------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
