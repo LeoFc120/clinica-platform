@@ -771,6 +771,27 @@ Criterios de aceptación:
 
 PR: Pendiente
 --------------------------------------------------------
+## TASK-019
+
+Título: Completar CRUD de Citas Médicas (Update & Delete)
+Responsable: Naye
+Rol: Backend / API
+Backup: Leopoldo Fuentes Cruz
+Estado: REVIEW
+Prioridad: HIGH
+Tipo: FEAT
+Branch: feat/backend-appointments-crud-complete
+Dependencias: TASK-018
+
+Descripción:
+Implementar los endpoints de actualización (PUT/PATCH) y eliminación (DELETE) en el controlador y las rutas de citas médicas, asegurando que estén protegidos por el middleware `verifyToken`.
+
+Criterios de aceptación:
+- [x] Endpoint PUT/PATCH `/api/v1/appointments/:id` actualiza la cita correctamente.
+- [x] Endpoint DELETE `/api/v1/appointments/:id` elimina la cita de la base de datos.
+- [x] Ambas rutas protegidas con `verifyToken`.
+- [x] Compilación exitosa con TypeScript (`npm run build`).
+------------------------------------------------------------------------------------------
 
 # PLANTILLA PARA NUEVAS TAREAS
 
