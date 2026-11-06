@@ -1629,6 +1629,85 @@ Pendiente
 Estado final:
 REVIEW
 ---------------------------------------------------------------------------------
+## SESSION-020
+
+Fecha:
+2026-11-06
+
+Integrante:
+Naye
+
+Rol:
+Backend / API
+
+Módulo:
+Backend / Seguridad y Validación
+
+TASK-ID:
+TASK-020
+
+Branch:
+feat/backend-zod-rbac-validation
+
+Objetivo de la sesión:
+Endurecer la seguridad, la integridad de los datos y el control de acceso en los endpoints del módulo de citas mediante Zod y RBAC.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Instalación de la librería `zod` en el proyecto backend.
+- Creación de los esquemas de validación en `appointment.schema.ts` para citas.
+- Implementación del middleware genérico `validateBody` para sanitizar peticiones HTTP.
+- Implementación del middleware de Control de Acceso por Roles (`checkRole`) adaptado al entorno estricto de TypeScript (`verbatimModuleSyntax`).
+- Integración de los nuevos middlewares de seguridad en `appointment.routes.ts`.
+- Pruebas de integración locales mediante Bruno y verificación de compilación.
+
+Archivos modificados:
+- backend/package.json
+- backend/package-lock.json
+- backend/src/schemas/appointment.schema.ts (Nuevo)
+- backend/src/middlewares/validate.middleware.ts (Nuevo)
+- backend/src/middlewares/rbac.middleware.ts (Nuevo)
+- backend/src/routes/appointment.routes.ts
+
+Pruebas realizadas:
+- Ejecución de `npm run build` (compilación sin errores).
+- Ejecución de `npm run test` (Jest en PASS verde).
+- Pruebas manuales en Bruno:
+  - Envío de payload inválido (respuestas HTTP 400 con errores de Zod).
+  - Envío de peticiones con roles no autorizados (respuestas HTTP 403 Forbidden).
+  - Creación de cita exitosa (HTTP 201 Created con UUID generado).
+
+Resultado de pruebas:
+- Todas las pruebas pasaron de forma exitosa y el servidor opera de manera estable.
+
+Problemas encontrados:
+- Advertencia menor en la configuración de Jest sobre `isolatedModules`, sin impacto en la ejecución.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+- Se estructuró la validación en una carpeta dedicada (`schemas/`) para mantener la modularidad y facilitar su reutilización en futuros módulos clínicos.
+
+Pendientes:
+- Realizar `git push` de la rama a GitHub.
+- Abrir el Pull Request hacia la rama `develop`.
+- Solicitud de Code Review a Leopoldo Fuentes Cruz (`INT-001`).
+
+Siguiente acción:
+- Subir cambios al repositorio remoto y abrir el PR.
+
+Commit:
+feat(backend): integrar validacion con Zod y middleware RBAC en citas
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+------------------------------------------------------------------------------
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
