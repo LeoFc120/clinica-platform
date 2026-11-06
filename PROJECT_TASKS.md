@@ -793,6 +793,73 @@ Criterios de aceptación:
 - [x] Compilación exitosa con TypeScript (`npm run build`).
 ------------------------------------------------------------------------------------------
 
+## TASK-020
+
+Título:
+Integración de validación con Zod y middleware de Control de Acceso por Roles (RBAC) en Citas
+
+Responsable:
+Naye
+
+Rol:
+Backend / API
+
+Backup:
+Leopoldo Fuentes Cruz
+
+Estado:
+REVIEW
+
+Prioridad:
+HIGH
+
+Tipo:
+FEAT
+
+Branch:
+feat/backend-zod-rbac-validation
+
+Dependencias:
+TASK-019
+
+Descripción:
+Implementar una capa estricta de validación de entradas utilizando esquemas de Zod e integrar un middleware de Control de Acceso por Roles (RBAC) en las rutas del módulo de citas para asegurar que solo los usuarios autorizados (ADMIN, DOCTOR, PATIENT) puedan ejecutar acciones específicas con payloads validados.
+
+Archivos esperados:
+- backend/src/schemas/appointment.schema.ts
+- backend/src/middlewares/validate.middleware.ts
+- backend/src/middlewares/rbac.middleware.ts
+- backend/src/routes/appointment.routes.ts
+
+Criterios de aceptación:
+- [x] Esquemas de Zod creados para la validación estricta de creación y actualización de citas.
+- [x] Middleware `validateBody` intercepta peticiones erróneas y responde con HTTP 400 Bad Request estructurado.
+- [x] Middleware `checkRole` restringe endpoints según el rol del JWT (ADMIN, DOCTOR, PATIENT), respondiendo con HTTP 403 Forbidden cuando corresponda.
+- [x] Rutas de citas protegidas integrando `verifyToken`, `checkRole` y `validateBody`.
+- [x] Compilación exitosa del backend con TypeScript (`npm run build`).
+- [x] Pruebas automatizadas ejecutadas en verde con Jest (`npm run test`).
+
+Pruebas requeridas:
+- [x] Validación de errores 400 Bad Request al enviar payloads inválidos desde Bruno.
+- [x] Validación de acceso denegado (403 Forbidden) al intentar acciones sin el rol requerido.
+- [x] Creación exitosa de citas (201 Created) con datos válidos y token autorizado.
+
+PR:
+Pendiente
+
+Commit:
+feat(backend): integrar validacion con Zod y middleware RBAC en citas
+
+Fecha de inicio:
+2026-11-05
+
+Fecha de finalización:
+2026-11-06
+
+Notas:
+Validado localmente mediante Bruno y pruebas unitarias con Jest.
+--------------------------------------------------------------------------
+
 # PLANTILLA PARA NUEVAS TAREAS
 
 ## TASK-XXX
