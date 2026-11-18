@@ -1629,6 +1629,158 @@ Pendiente
 Estado final:
 REVIEW
 ---------------------------------------------------------------------------------
+## SESSION-020
+
+Fecha:
+2026-11-06
+
+Integrante:
+Naye
+
+Rol:
+Backend / API
+
+Módulo:
+Backend / Seguridad y Validación
+
+TASK-ID:
+TASK-020
+
+Branch:
+feat/backend-zod-rbac-validation
+
+Objetivo de la sesión:
+Endurecer la seguridad, la integridad de los datos y el control de acceso en los endpoints del módulo de citas mediante Zod y RBAC.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Instalación de la librería `zod` en el proyecto backend.
+- Creación de los esquemas de validación en `appointment.schema.ts` para citas.
+- Implementación del middleware genérico `validateBody` para sanitizar peticiones HTTP.
+- Implementación del middleware de Control de Acceso por Roles (`checkRole`) adaptado al entorno estricto de TypeScript (`verbatimModuleSyntax`).
+- Integración de los nuevos middlewares de seguridad en `appointment.routes.ts`.
+- Pruebas de integración locales mediante Bruno y verificación de compilación.
+
+Archivos modificados:
+- backend/package.json
+- backend/package-lock.json
+- backend/src/schemas/appointment.schema.ts (Nuevo)
+- backend/src/middlewares/validate.middleware.ts (Nuevo)
+- backend/src/middlewares/rbac.middleware.ts (Nuevo)
+- backend/src/routes/appointment.routes.ts
+
+Pruebas realizadas:
+- Ejecución de `npm run build` (compilación sin errores).
+- Ejecución de `npm run test` (Jest en PASS verde).
+- Pruebas manuales en Bruno:
+  - Envío de payload inválido (respuestas HTTP 400 con errores de Zod).
+  - Envío de peticiones con roles no autorizados (respuestas HTTP 403 Forbidden).
+  - Creación de cita exitosa (HTTP 201 Created con UUID generado).
+
+Resultado de pruebas:
+- Todas las pruebas pasaron de forma exitosa y el servidor opera de manera estable.
+
+Problemas encontrados:
+- Advertencia menor en la configuración de Jest sobre `isolatedModules`, sin impacto en la ejecución.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+- Se estructuró la validación en una carpeta dedicada (`schemas/`) para mantener la modularidad y facilitar su reutilización en futuros módulos clínicos.
+
+Pendientes:
+- Realizar `git push` de la rama a GitHub.
+- Abrir el Pull Request hacia la rama `develop`.
+- Solicitud de Code Review a Leopoldo Fuentes Cruz (`INT-001`).
+
+Siguiente acción:
+- Subir cambios al repositorio remoto y abrir el PR.
+
+Commit:
+feat(backend): integrar validacion con Zod y middleware RBAC en citas
+
+Pull Request:
+Pendiente
+
+Estado final:
+REVIEW
+----------------------------------------------------------------------------------------
+## SESSION-021
+
+Fecha:
+2026-11-18
+
+Integrante:
+Naye
+
+Rol:
+Backend / API
+
+Módulo:
+Backend / Módulo de Doctores
+
+TASK-ID:
+TASK-021
+
+Branch:
+feat/backend-doctors-and-routes-security
+
+Objetivo de la sesión:
+Implementar de forma aislada e independiente el controlador y las rutas del recurso de doctores en el backend.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación de la rama `feat/backend-doctors-and-routes-security` a partir de `develop`.
+- Registro formal de la TASK-021 en `PROJECT_TASKS.md`.
+- Creación de `doctor.controller.ts` y `doctor.routes.ts`.
+- Registro de la ruta en `backend/src/routes/index.ts`.
+- Validación exitosa del endpoint en Bruno con respuesta HTTP 200 OK.
+
+Archivos modificados:
+- PROJECT_TASKS.md
+- PROJECT_SESSIONS.md
+- backend/src/controllers/doctor.controller.ts (Nuevo)
+- backend/src/routes/doctor.routes.ts (Nuevo)
+- backend/src/routes/index.ts (Modificado)
+
+Pruebas realizadas:
+- Compilación de TypeScript (`npm run build`).
+- Ejecución de pruebas unitarias (`npm run test`).
+- Prueba de integración local en Bruno con Bearer Token (`GET /api/v1/doctors`).
+
+Resultado de pruebas:
+- Exitosas (código 200 OK devolviendo la lista de doctores correctamente filtrada).
+
+Problemas encontrados:
+- Ninguno.
+
+Bloqueos:
+- Ninguno.
+
+Decisiones tomadas:
+- Se realizó el desarrollo de forma completamente independiente de la rama de Zod/RBAC, manteniendo la rama limpia y funcional.
+
+Pendientes:
+- Ninguno.
+
+Siguiente acción:
+- Subir los cambios a GitHub y abrir el Pull Request correspondiente.
+
+Commit:
+feat(backend): implementar modulo de doctores y rutas de seguridad
+
+Pull Request:
+Pendiente
+
+Estado final:
+COMPLETED
+-----------------------------------------------------------------------
+
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.
