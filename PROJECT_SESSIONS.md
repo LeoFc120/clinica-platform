@@ -1707,7 +1707,80 @@ Pendiente
 
 Estado final:
 REVIEW
-------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+## SESSION-021
+
+Fecha:
+2026-11-18
+
+Integrante:
+Naye
+
+Rol:
+Backend / API
+
+Módulo:
+Backend / Módulo de Doctores
+
+TASK-ID:
+TASK-021
+
+Branch:
+feat/backend-doctors-and-routes-security
+
+Objetivo de la sesión:
+Implementar de forma aislada e independiente el controlador y las rutas del recurso de doctores en el backend.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Creación de la rama `feat/backend-doctors-and-routes-security` a partir de `develop`.
+- Registro formal de la TASK-021 en `PROJECT_TASKS.md`.
+- Creación de `doctor.controller.ts` y `doctor.routes.ts`.
+- Registro de la ruta en `backend/src/routes/index.ts`.
+- Validación exitosa del endpoint en Bruno con respuesta HTTP 200 OK.
+
+Archivos modificados:
+- PROJECT_TASKS.md
+- PROJECT_SESSIONS.md
+- backend/src/controllers/doctor.controller.ts (Nuevo)
+- backend/src/routes/doctor.routes.ts (Nuevo)
+- backend/src/routes/index.ts (Modificado)
+
+Pruebas realizadas:
+- Compilación de TypeScript (`npm run build`).
+- Ejecución de pruebas unitarias (`npm run test`).
+- Prueba de integración local en Bruno con Bearer Token (`GET /api/v1/doctors`).
+
+Resultado de pruebas:
+- Exitosas (código 200 OK devolviendo la lista de doctores correctamente filtrada).
+
+Problemas encontrados:
+- Ninguno.
+
+Bloqueos:
+- Ninguno.
+
+Decisiones tomadas:
+- Se realizó el desarrollo de forma completamente independiente de la rama de Zod/RBAC, manteniendo la rama limpia y funcional.
+
+Pendientes:
+- Ninguno.
+
+Siguiente acción:
+- Subir los cambios a GitHub y abrir el Pull Request correspondiente.
+
+Commit:
+feat(backend): implementar modulo de doctores y rutas de seguridad
+
+Pull Request:
+Pendiente
+
+Estado final:
+COMPLETED
+-----------------------------------------------------------------------
+
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.

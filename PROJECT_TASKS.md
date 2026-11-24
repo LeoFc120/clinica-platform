@@ -792,6 +792,134 @@ Criterios de aceptación:
 - [x] Ambas rutas protegidas con `verifyToken`.
 - [x] Compilación exitosa con TypeScript (`npm run build`).
 ------------------------------------------------------------------------------------------
+## TASK-020
+
+Título:
+Integración de validación con Zod y middleware de Control de Acceso por Roles (RBAC) en Citas
+
+Responsable:
+Naye
+
+Rol:
+Backend / API
+
+Backup:
+Leopoldo Fuentes Cruz
+
+Estado:
+REVIEW
+
+Prioridad:
+HIGH
+
+Tipo:
+FEAT
+
+Branch:
+feat/backend-zod-rbac-validation
+
+Dependencias:
+TASK-019
+
+Descripción:
+Implementar una capa estricta de validación de entradas utilizando esquemas de Zod e integrar un middleware de Control de Acceso por Roles (RBAC) en las rutas del módulo de citas para asegurar que solo los usuarios autorizados (ADMIN, DOCTOR, PATIENT) puedan ejecutar acciones específicas con payloads validados.
+
+Archivos esperados:
+- backend/src/schemas/appointment.schema.ts
+- backend/src/middlewares/validate.middleware.ts
+- backend/src/middlewares/rbac.middleware.ts
+- backend/src/routes/appointment.routes.ts
+
+Criterios de aceptación:
+- [x] Esquemas de Zod creados para la validación estricta de creación y actualización de citas.
+- [x] Middleware `validateBody` intercepta peticiones erróneas y responde con HTTP 400 Bad Request estructurado.
+- [x] Middleware `checkRole` restringe endpoints según el rol del JWT (ADMIN, DOCTOR, PATIENT), respondiendo con HTTP 403 Forbidden cuando corresponda.
+- [x] Rutas de citas protegidas integrando `verifyToken`, `checkRole` y `validateBody`.
+- [x] Compilación exitosa del backend con TypeScript (`npm run build`).
+- [x] Pruebas automatizadas ejecutadas en verde con Jest (`npm run test`).
+
+Pruebas requeridas:
+- [x] Validación de errores 400 Bad Request al enviar payloads inválidos desde Bruno.
+- [x] Validación de acceso denegado (403 Forbidden) al intentar acciones sin el rol requerido.
+- [x] Creación exitosa de citas (201 Created) con datos válidos y token autorizado.
+
+PR:
+Pendiente
+
+Commit:
+feat(backend): integrar validacion con Zod y middleware RBAC en citas
+
+Fecha de inicio:
+2026-11-05
+
+Fecha de finalización:
+2026-11-06
+
+Notas:
+Validado localmente mediante Bruno y pruebas unitarias con Jest.
+----------------------------------------------------------------------------------------------------------
+## TASK-021
+
+Título:
+Implementación del módulo y endpoint de consulta de Doctores
+
+Responsable:
+Naye
+
+Rol:
+Backend / API
+
+Backup:
+Leopoldo Fuentes Cruz
+
+Estado:
+REVIEW
+
+Prioridad:
+HIGH
+
+Tipo:
+FEAT
+
+Branch:
+feat/backend-doctors-and-routes-security
+
+Dependencias:
+TASK-019
+
+Descripción:
+Desarrollar el controlador y las rutas dedicadas para listar a los usuarios con el rol `DOCTOR`, asegurando que la información esté protegida mediante el middleware `verifyToken` y omitiendo datos sensibles como las contraseñas.
+
+Archivos esperados:
+- backend/src/controllers/doctor.controller.ts (Nuevo)
+- backend/src/routes/doctor.routes.ts (Nuevo)
+- backend/src/routes/index.ts (Modificado)
+
+Criterios de aceptación:
+- [x] Endpoint `GET /api/v1/doctors` implementado utilizando Prisma Client.
+- [x] Filtro aplicado para retornar únicamente usuarios con `role: 'DOCTOR'`.
+- [x] Datos sensibles (contraseñas) excluidos de la respuesta JSON.
+- [x] Ruta protegida correctamente con el middleware `verifyToken`.
+- [x] Compilación exitosa de TypeScript (`npm run build`) y pruebas en verde (`npm run test`).
+
+Pruebas requeridas:
+- [x] Validación local del endpoint mediante Bruno enviando un Bearer Token válido, esperando código HTTP 200 OK.
+
+PR:
+Pendiente de apertura en GitHub
+
+Commit:
+feat(backend): implementar modulo de doctores y rutas de seguridad
+
+Fecha de inicio:
+2026-11-17
+
+Fecha de finalización:
+2026-11-18
+
+Notas:
+Desarrollo independiente enfocado en abastecer de médicos al frontend sin interferir con ramas paralelas de validación.
+-------------------------------------------------------------------------------------------------------------
 
 ## TASK-020
 
