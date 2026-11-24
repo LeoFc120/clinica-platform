@@ -987,6 +987,141 @@ Fecha de finalización:
 Notas:
 Validado localmente mediante Bruno y pruebas unitarias con Jest.
 --------------------------------------------------------------------------
+## TASK-022
+
+Título:
+Integración de API REST en Citas Médicas, Expedientes Clínicos, Dashboard y desacoplamiento de CSS en Pacientes
+
+Responsable:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Backup:
+Natali / Juan
+
+Estado:
+REVIEW
+
+Prioridad:
+HIGH
+
+Tipo:
+FEAT
+
+Branch:
+feat/frontend-appointments-and-fixes
+
+Dependencias:
+TASK-020, TASK-021
+
+Descripción:
+Conectar las vistas principales del frontend (`AppointmentsPage`, `MedicalRecordsPage` y `DashboardPage`) con los endpoints reales del backend (`/api/v1/appointments`, `/api/v1/patients` y `/api/v1/doctors`), corregir el mapeo de campos de PostgreSQL (`date` y `firstName`), implementar modales funcionales para agendar/gestionar citas y notas clínicas, y extraer los estilos de `PatientsPage` a su propio archivo CSS para facilitar el rediseño visual por parte del equipo de UI.
+
+Archivos esperados:
+- frontend/src/services/appointment.service.ts
+- frontend/src/pages/Appointments/AppointmentsPage.tsx
+- frontend/src/pages/Dashboard/DashboardPage.tsx
+- frontend/src/pages/MedicalRecords/MedicalRecordsPage.tsx
+- frontend/src/pages/Patients/PatientsPage.tsx
+- frontend/src/pages/Patients/PatientsPage.css
+
+Criterios de aceptación:
+- [x] Dashboard muestra métricas reales de pacientes y citas sin errores de fecha (`Invalid Date`) ni nombres indefinidos (`undefined`).
+- [x] Módulo de Citas Médicas permite listar, filtrar (por fecha, médico y estado), crear, actualizar estado y eliminar citas contra la API real.
+- [x] Módulo de Expedientes Clínicos consulta el historial real de citas por paciente y permite registrar nuevas notas médicas.
+- [x] Vista de Pacientes cuenta con su hoja de estilos independiente (`PatientsPage.css`) sin depender de Tailwind ni estilos de otros módulos.
+- [x] Manejo de errores HTTP (incluyendo `400 Bad Request` y `403 Forbidden` por RBAC) visible en interfaz.
+- [x] Compilación (`npm run build`) y linter (`npm run lint`) ejecutados sin errores.
+
+Pruebas requeridas:
+- [x] Validación end-to-end en navegador (localhost:5173) con roles `DOCTOR` y `RECEPTIONIST` verificando persistencia en PostgreSQL.
+
+PR:
+Pendiente de revisión en `clinica-platform-frontend`
+
+Commit:
+feat(frontend): conectar citas medicas, expedientes clinicos, dashboard y separar css de pacientes
+
+Fecha de inicio:
+2026-11-24
+
+Fecha de finalización:
+2026-11-24
+
+Notas:
+Lógica de datos y operaciones CRUD completadas y desacopladas de los archivos CSS para que Natali y Juan realicen únicamente mejoras estéticas.
+---------------------------------------------------------------------
+## TASK-023
+
+Título:
+Implementación de Agente de IA por WhatsApp para gestión de citas (`src/modules/whatsapp/`)
+
+Responsable:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Backup:
+Charbel / Naye
+
+Estado:
+IN_PROGRESS
+
+Prioridad:
+MEDIUM
+
+Tipo:
+FEAT
+
+Branch:
+feat/whatsapp-agent
+
+Dependencias:
+TASK-020, TASK-021, ADR-005
+
+Descripción:
+Desarrollar un módulo aislado en `backend/src/modules/whatsapp/` integrado con Meta WhatsApp Cloud API y Gemini Flash (`@google/genai`) mediante *function calling* para que los pacientes puedan consultar disponibilidad, agendar y cancelar citas médicas por WhatsApp sin acceso directo del LLM a la base de datos.
+
+Archivos esperados:
+- backend/prisma/schema.prisma (modelos WhatsappConversation y WhatsappMessage)
+- backend/src/server.ts (montaje de /api/whatsapp y captura de rawBody)
+- backend/src/modules/whatsapp/whatsapp.routes.ts
+- backend/src/modules/whatsapp/whatsapp.controller.ts
+- backend/src/modules/whatsapp/whatsapp.provider.ts
+- backend/src/modules/whatsapp/agent.service.ts
+- backend/src/modules/whatsapp/whatsapp.tools.ts
+- backend/.env.example
+
+Criterios de aceptación:
+- [ ] Webhook responde verificación `GET` de Meta y valida firma `X-Hub-Signature-256` en `POST`.
+- [ ] Idempotencia garantizada por `externalId` único en `WhatsappMessage` y respuesta `200 OK` inmediata.
+- [ ] Modelos `WhatsappConversation` y `WhatsappMessage` migrados sin alterar `User`, `Patient` ni `Appointment`.
+- [ ] Agente utiliza Gemini Flash con herramientas (`buscar_paciente`, `listar_horarios_disponibles`, `agendar_cita`, `cancelar_cita`) revalidando disponibilidad y pertenencia en backend.
+- [ ] Solicita confirmación explícita antes de agendar o cancelar y deriva consultas médicas a la clínica.
+- [ ] Pruebas unitarias y de integración en Jest (`npm run test`) y compilación (`npm run build`) en verde.
+
+Pruebas requeridas:
+- [ ] Validación de verificación GET y firma HMAC en webhook local mediante túnel HTTPS.
+- [ ] Pruebas Jest con LLM simulado, herramientas simuladas y `supertest` para el webhook.
+
+PR:
+Pendiente
+
+Commit:
+Pendiente
+
+Fecha de inicio:
+2026-11-24
+
+Fecha de finalización:
+Pendiente
+
+Notas:
+Aprobación de esquema BD coordinada con Charbel y reglas de disponibilidad de citas con Roque/Naye.
+
 
 # PLANTILLA PARA NUEVAS TAREAS
 

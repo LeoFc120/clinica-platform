@@ -119,3 +119,39 @@ Motivo:
 Impacto:
 
 Integrantes involucrados:
+
+
+# ADR-005
+
+Fecha:
+2026-11-24
+
+Título:
+Integración de Agente de IA por WhatsApp para gestión de citas médicas
+
+Estado:
+PROPUESTA
+
+Problema:
+Los pacientes actualmente dependen de la recepción o del personal clínico para agendar, consultar o cancelar citas médicas en la plataforma, generando carga operativa manual y limitando la atención fuera de horario.
+
+Opciones consideradas:
+1. Flujo rígido basado únicamente en menús numéricos de WhatsApp.
+2. Bot acoplado directamente a consultas SQL o modificando los controladores existentes.
+3. Módulo aislado (`backend/src/modules/whatsapp/`) conectado a WhatsApp Cloud API de Meta y Gemini (modelo Flash vigente vía `@google/genai`) con *function calling*, delegando toda la lógica y validación de negocio a capas de servicio del backend.
+
+Decisión:
+Implementar un módulo nuevo y aislado en `backend/src/modules/whatsapp/` que reciba eventos de WhatsApp Cloud API mediante `POST /api/whatsapp/webhook`, valide firma HMAC (`X-Hub-Signature-256`) e idempotencia (`externalId`), y utilice Gemini Flash con *function calling* como interfaz conversacional. El modelo de IA nunca tendrá acceso directo a Prisma ni a PostgreSQL; únicamente invocará herramientas tipadas (`buscar_paciente`, `listar_horarios_disponibles`, `agendar_cita`, `cancelar_cita`) ejecutadas y validadas por el backend, persistiendo el historial en dos tablas nuevas (`WhatsappConversation` y `WhatsappMessage`) sin alterar los modelos existentes (`User`, `Patient`, `Appointment`).
+
+Motivo:
+Aislar completamente la nueva funcionalidad para no romper los módulos ya aprobados, garantizar seguridad mediante verificación de firma y revalidación de reglas en el backend, y mantener una capa de canal desacoplada (`sendMessage`).
+
+Impacto:
+- Se agregará únicamente `@google/genai` en `backend/package.json`.
+- Se añadirán dos tablas nuevas en `backend/prisma/schema.prisma` (requiere revisión con Charbel antes de migrar).
+- Se montará la ruta `/api/whatsapp` en `backend/src/server.ts` con captura de `rawBody` para validación criptográfica.
+
+Integrantes involucrados:
+Leopoldo Fuentes Cruz (Arquitectura / Integración), Charbel (Revisión de BD / Prisma), Roque / Naye (Revisión de reglas de citas).
+
+---
