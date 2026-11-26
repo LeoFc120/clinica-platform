@@ -130,7 +130,7 @@ Título:
 Integración de Agente de IA por WhatsApp para gestión de citas médicas
 
 Estado:
-PROPUESTA
+APROBADA
 
 Problema:
 Los pacientes actualmente dependen de la recepción o del personal clínico para agendar, consultar o cancelar citas médicas en la plataforma, generando carga operativa manual y limitando la atención fuera de horario.

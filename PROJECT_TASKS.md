@@ -1122,6 +1122,22 @@ Pendiente
 Notas:
 Aprobación de esquema BD coordinada con Charbel y reglas de disponibilidad de citas con Roque/Naye.
 
+-----------------------------------------------------------------
+### [TASK-024] Despliegue Full-Stack en Producción (Neon + Render + Vercel)
+- **Estado:** Completada (`DONE`)
+- **Responsable:** Leo (Arquitectura / Integración)
+- **Fecha:** 2026-11-25
+- **Descripción:** Migración de base de datos, despliegue continuo del backend API y publicación de la SPA en producción con disponibilidad 24/7.
+- **Entregables realizados:**
+  - Creación de proyecto PostgreSQL serverless en **Neon** (`clinica-platform-prod`, región `AWS US East 2`), ejecución remota de migraciones (`npx prisma migrate deploy`) y poblado inicial del usuario `ADMIN` (`npm run seed`).
+  - Despliegue del servicio backend (`clinica-platform-api`) en **Render** (`https://clinica-platform-api.onrender.com`), resolviendo la instalación de `@types/*` en entorno `NODE_ENV=production` mediante `npm install --include=dev` y generación de Prisma Client v7.10.0.
+  - Configuración de monitor de disponibilidad en **cron-job.org** ejecutando peticiones `GET` cada 10 minutos a `/api/v1/health` para evitar suspensión por inactividad.
+  - Refactorización de servicios del frontend (`src/services/api.ts` y `src/services/auth.service.ts`) para consumir dinámicamente `import.meta.env.VITE_API_URL`, configuración de rewrites SPA en `frontend/vercel.json` y publicación en **Vercel** (`https://clinica-platform-front.vercel.app`).
+- **Criterios de aceptación verificados:**
+  - Login funcional desde el dominio de Vercel contra la API de Render y persistencia verificada en Neon.
+  - Navegación entre vistas protegidas (`/dashboard`, pacientes, citas y expedientes) sin errores 404 al recargar.
+
+
 
 # PLANTILLA PARA NUEVAS TAREAS
 
