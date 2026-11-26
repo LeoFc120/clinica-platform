@@ -10,10 +10,25 @@ import {
   executeWhatsappTool,
 } from './whatsapp.tools.js';
 
-const MAX_HISTORY_MESSAGES = 12;
+const MAX_HISTORY_MESSAGES = 8;
 const MAX_TOOL_ITERATIONS = 5;
+const SESSION_TIMEOUT_MS = 12 * 60 * 60 * 1000; // 12 horas
 const FALLBACK_REPLY =
   'En este momento tengo un problema técnico para procesar tu solicitud. Por favor intenta de nuevo en unos minutos o comunícate directamente con la clínica.';
+
+const WELCOME_REPLY = [
+  '¡Hola! 👋 Bienvenido a *Clínica Platform*.',
+  '',
+  'Soy tu asistente virtual de recepción. Puedo ayudarte con:',
+  '• *Consultar horarios* disponibles (Lunes a Viernes de 09:00 a 16:00 hrs.)',
+  '• *Agendar* una cita médica',
+  '• *Consultar o cancelar* tus citas activas',
+  '',
+  '¿En qué te puedo ayudar hoy?',
+].join('\n');
+
+const GREETING_REGEX =
+  /^(hola+|buen[oa]s(\s+(dias|días|tardes|noches))?|que\s+tal|qué\s+tal|hey|hi|hello|inicio|empezar|menu|menú|ayuda|info|informacion|información)[!?.¡¿\s]*$/i;
 
 const getCurrentMexicoDateInfo = (): string => {
   const nowMexico = new Date(Date.now() - 6 * 60 * 60 * 1000);
@@ -24,24 +39,22 @@ const getCurrentMexicoDateInfo = (): string => {
   const min = String(nowMexico.getUTCMinutes()).padStart(2, '0');
   const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
   const dayName = days[nowMexico.getUTCDay()];
-  return `${dayName} ${yyyy}-${mm}-${dd}, hora local México ${hh}:${min} (zona America/Mexico_City)`;
+  return `${dayName} ${yyyy}-${mm}-${dd} ${hh}:${min} (America/Mexico_City)`;
 };
 
 const buildSystemInstruction = (senderPhone: string): string => {
   return [
-    'Eres el asistente virtual de recepción de Clínica Platform por WhatsApp.',
-    `Fecha y hora actual: ${getCurrentMexicoDateInfo()}.`,
-    `Teléfono del usuario que escribe: ${senderPhone}.`,
-    'Reglas estrictas:',
-    '1. Responde siempre en español, de forma breve, clara, cordial y directa (formato WhatsApp, sin tablas complejas).',
-    '2. Al iniciar una conversación o cuando el usuario pida consultar/agendar/cancelar citas, llama primero a buscar_paciente para identificar si ya está registrado y ver sus citas pendientes.',
-    '3. Horario de atención: Lunes a Viernes de 09:00 a 17:00 (última cita a las 16:00, bloques de 1 hora). Nunca ofrezcas fines de semana ni horarios fuera de ese rango.',
-    '4. Nunca inventes médicos, horarios ni IDs de cita; usa exclusivamente los datos devueltos por las herramientas.',
-    '5. Si el paciente es nuevo (encontrado: false), antes de llamar a agendar_cita pídele en un solo mensaje su nombre completo, su fecha de nacimiento (día, mes y año) y el motivo de consulta.',
-    '6. NUNCA ejecutes agendar_cita ni cancelar_cita sin haberle mostrado antes los datos exactos (médico, fecha y hora) y recibido su confirmación explícita ("sí", "confirmo", "adelante").',
-    '7. Nunca des diagnósticos médicos, consejos clínicos ni recomendaciones de medicamentos; ante cualquier consulta médica o síntoma, indica que no realizas valoraciones médicas y ofrece agendar una cita con un médico de la clínica.',
-    '8. Convierte fechas relativas ("mañana", "este viernes") a formato YYYY-MM-DD usando la fecha actual indicada arriba.',
-    '9. Nunca reveles UUIDs internos al paciente.',
+    'Eres el asistente de recepción de Clínica Platform por WhatsApp.',
+    `Hoy: ${getCurrentMexicoDateInfo()}. Teléfono: ${senderPhone}.`,
+    'Reglas:',
+    '1. Español, breve, cordial y directo (formato WhatsApp, sin tablas).',
+    '2. Al consultar/agendar/cancelar, llama primero a buscar_paciente.',
+    '3. Horario: Lunes a Viernes 09:00-17:00 (última cita 16:00, bloques de 1h). Nunca fines de semana ni fuera de horario.',
+    '4. Usa solo datos devueltos por las herramientas; nunca inventes médicos, horarios ni IDs ni reveles UUIDs.',
+    '5. Si encontrado=false, pide en un mensaje: nombre completo, fecha de nacimiento (YYYY-MM-DD) y motivo antes de agendar_cita.',
+    '6. NUNCA ejecutes agendar_cita ni cancelar_cita sin mostrar resumen (médico, fecha, hora) y recibir confirmación explícita ("sí", "confirmo").',
+    '7. No des diagnósticos ni medicamentos; deriva cualquier síntoma a agendar consulta médica.',
+    '8. Convierte fechas relativas a YYYY-MM-DD según la fecha actual.',
   ].join('\n');
 };
 
@@ -95,11 +108,21 @@ export const processIncomingWhatsappMessage = async (
     }
   }
 
-  // 2. Obtener o crear la conversación aislada por teléfono
+  // 2. Verificar estado previo para detectar chat nuevo o sesión expirada
+  const previousConversation = await prisma.whatsappConversation.findUnique({
+    where: { phone: senderPhone },
+    select: { id: true, lastMessageAt: true },
+  });
+
+  const now = new Date();
+  const isNewOrExpiredSession =
+    !previousConversation ||
+    now.getTime() - previousConversation.lastMessageAt.getTime() > SESSION_TIMEOUT_MS;
+
   const conversation = await prisma.whatsappConversation.upsert({
     where: { phone: senderPhone },
-    update: { lastMessageAt: new Date() },
-    create: { phone: senderPhone, lastMessageAt: new Date() },
+    update: { lastMessageAt: now },
+    create: { phone: senderPhone, lastMessageAt: now },
   });
 
   // 3. Guardar mensaje entrante del usuario
@@ -112,9 +135,28 @@ export const processIncomingWhatsappMessage = async (
     },
   });
 
-  // 4. Cargar historial reciente y asegurar alternancia válida terminando en 'user'
+  // 3.1 Ahorro de tokens: bienvenida automática local (0 tokens) ante saludos simples
+  if (GREETING_REGEX.test(cleanText)) {
+    await prisma.whatsappMessage.create({
+      data: {
+        conversationId: conversation.id,
+        role: 'assistant',
+        content: WELCOME_REPLY,
+      },
+    });
+    return WELCOME_REPLY;
+  }
+
+  // 4. Cargar historial reciente de la sesión activa y asegurar alternancia 'user'/'model'
+  const sessionCutoff = isNewOrExpiredSession
+    ? new Date(now.getTime() - 60 * 1000)
+    : new Date(now.getTime() - SESSION_TIMEOUT_MS);
+
   const recentMessages = await prisma.whatsappMessage.findMany({
-    where: { conversationId: conversation.id },
+    where: {
+      conversationId: conversation.id,
+      createdAt: { gte: sessionCutoff },
+    },
     orderBy: { createdAt: 'desc' },
     take: MAX_HISTORY_MESSAGES,
   });
@@ -138,7 +180,7 @@ export const processIncomingWhatsappMessage = async (
 
   let finalReply: string | null = null;
 
-  // 5. Bucle de conversación + Function Calling con Gemini 3.5
+  // 5. Bucle de conversación + Function Calling con Gemini 3.5 (ThinkingLevel.LOW)
   try {
     for (let step = 0; step < MAX_TOOL_ITERATIONS; step++) {
       if (contents[contents.length - 1]?.role !== 'user') {
@@ -152,7 +194,7 @@ export const processIncomingWhatsappMessage = async (
           systemInstruction: buildSystemInstruction(senderPhone),
           tools: [{ functionDeclarations: whatsappToolDeclarations }],
           thinkingConfig: {
-            thinkingLevel: ThinkingLevel.MEDIUM,
+            thinkingLevel: ThinkingLevel.LOW,
           },
           temperature: 0.2,
         },
