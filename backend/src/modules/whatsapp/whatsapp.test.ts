@@ -2,6 +2,37 @@ import crypto from 'crypto';
 import express from 'express';
 import request from 'supertest';
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
+
+jest.mock('../../config/prisma.js', () => ({
+  prisma: {
+    whatsappMessage: {
+      findUnique: jest.fn(),
+      create: jest.fn(),
+      findMany: jest.fn(),
+    },
+    whatsappConversation: {
+      findUnique: jest.fn(),
+      upsert: jest.fn(),
+      update: jest.fn(),
+    },
+    user: {
+      findFirst: jest.fn(),
+      findMany: jest.fn(),
+    },
+    patient: {
+      findFirst: jest.fn(),
+      create: jest.fn(),
+    },
+    appointment: {
+      findFirst: jest.fn(),
+      findMany: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+    },
+    $transaction: jest.fn(),
+  },
+}));
+
 import { prisma } from '../../config/prisma.js';
 import whatsappRoutes from './whatsapp.routes.js';
 import { resetWhatsappRateLimit } from './whatsapp.controller.js';
@@ -34,6 +65,8 @@ describe('Módulo WhatsApp Agent (TASK-023 / ADR-005)', () => {
   beforeEach(() => {
     process.env.WHATSAPP_VERIFY_TOKEN = TEST_VERIFY_TOKEN;
     process.env.WHATSAPP_APP_SECRET = TEST_APP_SECRET;
+    process.env.WHATSAPP_PHONE_NUMBER_ID = 'test_phone_number_id';
+    process.env.WHATSAPP_ACCESS_TOKEN = 'test_access_token';
     resetWhatsappRateLimit();
     jest.restoreAllMocks();
   });
