@@ -1781,6 +1781,83 @@ Estado final:
 COMPLETED
 -----------------------------------------------------------------------
 
+## SESSION-022
+
+Fecha:
+2026-11-24
+
+Integrante:
+Leopoldo Fuentes Cruz
+
+Rol:
+Arquitectura / Integración
+
+Módulo:
+Frontend / Integración Full-Stack
+
+TASK-ID:
+TASK-022
+
+Branch:
+feat/frontend-appointments-and-fixes
+
+Objetivo de la sesión:
+Finalizar la validación de los Pull Requests #36 y #37 en el backend y conectar los módulos faltantes del frontend (Citas Médicas, Expedientes Clínicos y Dashboard) con la API real de PostgreSQL.
+
+Estado inicial:
+READY
+
+Trabajo realizado:
+- Validación mediante Bruno y pgAdmin de los endpoints de doctores (`GET /api/v1/doctors`), validación de esquemas con Zod (`400 Bad Request`) y control de permisos RBAC (`403 Forbidden`), aprobando y fusionando los PRs #36 y #37 en `develop`.
+- Corrección de mapeo de campos en `appointment.service.ts`, `DashboardPage.tsx` y `AppointmentsPage.tsx` cambiando `dateTime` por `date` y `patient.name` por `patient.firstName`.
+- Implementación de métodos `getDoctors`, `create`, `update` y `delete` en `AppointmentService`.
+- Construcción de filtros dinámicos y modales funcionales en `AppointmentsPage.tsx` para agendar citas, cambiar estados (`PENDING`, `COMPLETED`, `CANCELLED`) y eliminar registros.
+- Conexión de `MedicalRecordsPage.tsx` con el historial real de citas por paciente y formulario modal para registrar nuevas notas médicas.
+- Creación de `PatientsPage.css` y limpieza de clases de Tailwind en `PatientsPage.tsx` para aislar la capa visual.
+
+Archivos modificados:
+- frontend/src/services/appointment.service.ts
+- frontend/src/pages/Appointments/AppointmentsPage.tsx
+- frontend/src/pages/Dashboard/DashboardPage.tsx
+- frontend/src/pages/MedicalRecords/MedicalRecordsPage.tsx
+- frontend/src/pages/Patients/PatientsPage.tsx
+- frontend/src/pages/Patients/PatientsPage.css (Nuevo)
+
+Pruebas realizadas:
+- Pruebas de endpoints en Bruno (`200 OK`, `201 Created`, `400 Bad Request`, `403 Forbidden`) e inspección directa de tablas en pgAdmin.
+- Pruebas funcionales en navegador (`http://localhost:5173`) iniciando sesión con rol `DOCTOR` (acceso total) y `RECEPTIONIST` (acceso a pacientes y bloqueo controlado `403` en citas/expedientes).
+- Ejecución de `npm run build` y `npm run lint` en el repositorio frontend.
+
+Resultado de pruebas:
+- Todos los módulos del frontend consumen y persisten datos reales en PostgreSQL sin errores de mapeo ni de compilación.
+
+Problemas encontrados:
+- Conflicto menor de fusión en `PROJECT_SESSIONS.md` entre los PRs #36 y #37 del backend, resuelto conservando ambas sesiones.
+- Inconsistencia inicial entre nombres de propiedades en interfaces del frontend (`dateTime`, `name`) frente al esquema de Prisma (`date`, `firstName`), corregida en los servicios y vistas.
+
+Bloqueos:
+Ninguno.
+
+Decisiones tomadas:
+- Reutilizar el modelo `Appointment` con estado `COMPLETED` para registrar notas clínicas en `MedicalRecordsPage`, evitando alterar el esquema de base de datos en la recta final.
+- Aislar `PatientsPage.css` como hoja de estilos independiente para entregar una estructura limpia a Natali y Juan enfocada únicamente en diseño UI.
+
+Pendientes:
+- Crear el Pull Request de `feat/frontend-appointments-and-fixes` en `clinica-platform-frontend`.
+- Aplicar rediseño estético en CSS por parte del equipo de Frontend y realizar merge final a `main`.
+
+Siguiente acción:
+Abrir el PR en GitHub y notificar a Natali y Juan que los módulos funcionales están listos para estilizado.
+
+Commit:
+feat(frontend): conectar citas medicas, expedientes clinicos, dashboard y separar css de pacientes
+
+Pull Request:
+Pendiente de aprobación en `clinica-platform-frontend`
+
+Estado final:
+REVIEW
+
 # REGLAS
 
 1. No copiar conversaciones completas con Gemini.

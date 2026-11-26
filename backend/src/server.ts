@@ -3,6 +3,7 @@ import type { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import apiRouter from './routes/index.js';
+import whatsappRoutes from './modules/whatsapp/whatsapp.routes.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config();
@@ -11,7 +12,13 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
-app.use(express.json());
+app.use(
+  express.json({
+    verify: (req, _res, buf) => {
+      (req as Request & { rawBody?: Buffer }).rawBody = buf;
+    },
+  })
+);
 
 app.get('/api/health', (req: Request, res: Response) => {
   res.json({ status: 'OK', message: 'Clinica Platform Backend is running' });
@@ -19,6 +26,9 @@ app.get('/api/health', (req: Request, res: Response) => {
 
 // Nuevas rutas base de la API v1 (TASK-005)
 app.use('/api/v1', apiRouter);
+
+// Módulo aislado de WhatsApp Cloud API (TASK-023)
+app.use('/api/whatsapp', whatsappRoutes);
 
 // Manejo de rutas inexistentes (404)
 app.use((_req: Request, res: Response) => {
