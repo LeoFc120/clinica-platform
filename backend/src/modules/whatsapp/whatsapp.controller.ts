@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import type { Request, Response } from 'express';
 import { sendMessage } from './whatsapp.provider.js';
+import { processIncomingWhatsappMessage } from './agent.service.js';
 
 interface RequestWithRawBody extends Request {
   rawBody?: Buffer;
@@ -42,7 +43,7 @@ export const verifyWebhook = (req: Request, res: Response): void => {
   res.sendStatus(403);
 };
 
-// POST /api/whatsapp/webhook — Recepción de mensajes (Modo Eco en F2)
+// POST /api/whatsapp/webhook — Recepción de mensajes y ejecución del Agente IA (F4)
 export const handleWebhook = (req: Request, res: Response): void => {
   console.log('[WhatsApp POST] Petición recibida de Meta');
 
@@ -71,12 +72,20 @@ const processIncomingPayload = async (body: any): Promise<void> => {
 
         for (const msg of messages) {
           if (msg.type === 'text' && msg.from && msg.text?.body) {
-            await sendMessage(msg.from, `Eco: ${msg.text.body}`);
+            const reply = await processIncomingWhatsappMessage({
+              externalId: typeof msg.id === 'string' ? msg.id : undefined,
+              senderPhone: String(msg.from),
+              text: String(msg.text.body),
+            });
+
+            if (reply) {
+              await sendMessage(String(msg.from), reply);
+            }
           }
         }
       }
     }
   } catch (error) {
-    console.error('[WhatsApp Webhook F2 Error]:', error);
+    console.error('[WhatsApp Agent F4 Error]:', error);
   }
 };
