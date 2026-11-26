@@ -3,6 +3,13 @@ import express from 'express';
 import request from 'supertest';
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
 
+jest.mock('@prisma/client', () => ({
+  Prisma: {
+    TransactionIsolationLevel: {
+      Serializable: 'Serializable',
+    },
+  },
+}));
 jest.mock('../../config/prisma.js', () => ({
   prisma: {
     whatsappMessage: {
