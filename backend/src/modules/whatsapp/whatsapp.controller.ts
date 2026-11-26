@@ -7,6 +7,48 @@ interface RequestWithRawBody extends Request {
   rawBody?: Buffer;
 }
 
+interface RateLimitEntry {
+  timestamps: number[];
+  notifiedInWindow: boolean;
+}
+
+const RATE_LIMIT_MAX_MESSAGES = 20;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutos
+const phoneRateLimits = new Map<string, RateLimitEntry>();
+
+export const resetWhatsappRateLimit = (): void => {
+  phoneRateLimits.clear();
+};
+
+export const checkPhoneRateLimit = (
+  phone: string,
+  nowMs: number = Date.now()
+): { allowed: boolean; shouldNotify: boolean } => {
+  const key = phone.replace(/\D/g, '') || phone;
+  const windowStart = nowMs - RATE_LIMIT_WINDOW_MS;
+  const current = phoneRateLimits.get(key) ?? {
+    timestamps: [],
+    notifiedInWindow: false,
+  };
+
+  current.timestamps = current.timestamps.filter((ts) => ts > windowStart);
+
+  if (current.timestamps.length === 0) {
+    current.notifiedInWindow = false;
+  }
+
+  if (current.timestamps.length >= RATE_LIMIT_MAX_MESSAGES) {
+    const shouldNotify = !current.notifiedInWindow;
+    current.notifiedInWindow = true;
+    phoneRateLimits.set(key, current);
+    return { allowed: false, shouldNotify };
+  }
+
+  current.timestamps.push(nowMs);
+  phoneRateLimits.set(key, current);
+  return { allowed: true, shouldNotify: false };
+};
+
 const isValidSignature = (req: RequestWithRawBody): boolean => {
   const appSecret = process.env.WHATSAPP_APP_SECRET;
   const signatureHeader = req.headers['x-hub-signature-256'];
@@ -43,7 +85,7 @@ export const verifyWebhook = (req: Request, res: Response): void => {
   res.sendStatus(403);
 };
 
-// POST /api/whatsapp/webhook — Recepción de mensajes y ejecución del Agente IA (F4)
+// POST /api/whatsapp/webhook — Recepción de mensajes y ejecución del Agente IA (F4/F5)
 export const handleWebhook = (req: Request, res: Response): void => {
   console.log('[WhatsApp POST] Petición recibida de Meta');
 
@@ -72,14 +114,28 @@ const processIncomingPayload = async (body: any): Promise<void> => {
 
         for (const msg of messages) {
           if (msg.type === 'text' && msg.from && msg.text?.body) {
+            const senderPhone = String(msg.from);
+            const rateStatus = checkPhoneRateLimit(senderPhone);
+
+            if (!rateStatus.allowed) {
+              console.warn('[WhatsApp RateLimit] Límite excedido para teléfono:', senderPhone);
+              if (rateStatus.shouldNotify) {
+                await sendMessage(
+                  senderPhone,
+                  'Has alcanzado el límite temporal de mensajes. Por favor espera unos minutos antes de volver a escribir.'
+                );
+              }
+              continue;
+            }
+
             const reply = await processIncomingWhatsappMessage({
               externalId: typeof msg.id === 'string' ? msg.id : undefined,
-              senderPhone: String(msg.from),
+              senderPhone,
               text: String(msg.text.body),
             });
 
             if (reply) {
-              await sendMessage(String(msg.from), reply);
+              await sendMessage(senderPhone, reply);
             }
           }
         }
