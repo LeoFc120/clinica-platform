@@ -1,14 +1,6 @@
-import {
-  GoogleGenAI,
-  ThinkingLevel,
-  type Content,
-  type Part,
-} from '@google/genai';
+import { GoogleGenAI, ThinkingLevel, type Content, type Part } from '@google/genai';
 import { prisma } from '../../config/prisma.js';
-import {
-  whatsappToolDeclarations,
-  executeWhatsappTool,
-} from './whatsapp.tools.js';
+import { whatsappToolDeclarations, executeWhatsappTool } from './whatsapp.tools.js';
 
 const MAX_HISTORY_MESSAGES = 8;
 const MAX_TOOL_ITERATIONS = 5;
@@ -58,9 +50,7 @@ const buildSystemInstruction = (senderPhone: string): string => {
   ].join('\n');
 };
 
-const buildSanitizedContents = (
-  messages: Array<{ role: string; content: string }>
-): Content[] => {
+const buildSanitizedContents = (messages: Array<{ role: string; content: string }>): Content[] => {
   const sanitized: Content[] = [];
 
   for (const msg of messages) {

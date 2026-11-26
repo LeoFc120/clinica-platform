@@ -58,8 +58,7 @@ const isValidSignature = (req: RequestWithRawBody): boolean => {
   }
 
   const expectedHash =
-    'sha256=' +
-    crypto.createHmac('sha256', appSecret).update(req.rawBody).digest('hex');
+    'sha256=' + crypto.createHmac('sha256', appSecret).update(req.rawBody).digest('hex');
 
   const sigBuffer = Buffer.from(signatureHeader);
   const expectedBuffer = Buffer.from(expectedHash);

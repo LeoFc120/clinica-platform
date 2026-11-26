@@ -197,10 +197,7 @@ export const executeWhatsappTool = async (
         role: 'DOCTOR',
         ...(medicoFiltro
           ? {
-              OR: [
-                { id: medicoFiltro },
-                { name: { contains: medicoFiltro, mode: 'insensitive' } },
-              ],
+              OR: [{ id: medicoFiltro }, { name: { contains: medicoFiltro, mode: 'insensitive' } }],
             }
           : {}),
       },
