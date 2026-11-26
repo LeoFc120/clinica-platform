@@ -1068,7 +1068,7 @@ Backup:
 Charbel / Naye
 
 Estado:
-IN_PROGRESS
+REVIEW
 
 Prioridad:
 MEDIUM
@@ -1083,7 +1083,7 @@ Dependencias:
 TASK-020, TASK-021, ADR-005
 
 Descripción:
-Desarrollar un módulo aislado en `backend/src/modules/whatsapp/` integrado con Meta WhatsApp Cloud API y Gemini Flash (`@google/genai`) mediante *function calling* para que los pacientes puedan consultar disponibilidad, agendar y cancelar citas médicas por WhatsApp sin acceso directo del LLM a la base de datos.
+Desarrollar un módulo aislado en `backend/src/modules/whatsapp/` integrado con Meta WhatsApp Cloud API y Gemini Flash (`@google/genai`, modelo `gemini-3.5-flash-lite`) mediante *function calling* para que los pacientes puedan consultar disponibilidad, agendar y cancelar citas médicas por WhatsApp sin acceso directo del LLM a la base de datos.
 
 Archivos esperados:
 - backend/prisma/schema.prisma (modelos WhatsappConversation y WhatsappMessage)
@@ -1093,35 +1093,35 @@ Archivos esperados:
 - backend/src/modules/whatsapp/whatsapp.provider.ts
 - backend/src/modules/whatsapp/agent.service.ts
 - backend/src/modules/whatsapp/whatsapp.tools.ts
+- backend/src/modules/whatsapp/whatsapp.test.ts
 - backend/.env.example
 
 Criterios de aceptación:
-- [ ] Webhook responde verificación `GET` de Meta y valida firma `X-Hub-Signature-256` en `POST`.
-- [ ] Idempotencia garantizada por `externalId` único en `WhatsappMessage` y respuesta `200 OK` inmediata.
-- [ ] Modelos `WhatsappConversation` y `WhatsappMessage` migrados sin alterar `User`, `Patient` ni `Appointment`.
-- [ ] Agente utiliza Gemini Flash con herramientas (`buscar_paciente`, `listar_horarios_disponibles`, `agendar_cita`, `cancelar_cita`) revalidando disponibilidad y pertenencia en backend.
-- [ ] Solicita confirmación explícita antes de agendar o cancelar y deriva consultas médicas a la clínica.
-- [ ] Pruebas unitarias y de integración en Jest (`npm run test`) y compilación (`npm run build`) en verde.
+- [x] Webhook responde verificación `GET` de Meta y valida firma `X-Hub-Signature-256` en `POST`.
+- [x] Idempotencia garantizada por `externalId` único en `WhatsappMessage`, control de *rate limiting* por teléfono (20 mensajes / 10 min) y respuesta `200 OK` inmediata.
+- [x] Modelos `WhatsappConversation` y `WhatsappMessage` migrados sin alterar `User`, `Patient` ni `Appointment`.
+- [x] Agente utiliza `gemini-3.5-flash-lite` con herramientas (`buscar_paciente`, `listar_horarios_disponibles`, `agendar_cita`, `cancelar_cita`) revalidando disponibilidad en transacción serializable y pertenencia en backend.
+- [x] Solicita confirmación explícita antes de agendar o cancelar y deriva consultas médicas a la clínica.
+- [x] Pruebas unitarias y de integración en Jest (`npm run test`: 2 suites, 9 tests en verde) y compilación (`npm run build`) en verde.
 
 Pruebas requeridas:
-- [ ] Validación de verificación GET y firma HMAC en webhook local mediante túnel HTTPS.
-- [ ] Pruebas Jest con LLM simulado, herramientas simuladas y `supertest` para el webhook.
+- [x] Validación de verificación GET, firma HMAC y 8 escenarios reales por WhatsApp (alta de paciente nuevo, reconocimiento de paciente existente, rechazo de doble reserva, restricción de horario L–V 09:00–17:00, cancelación propia, confirmación explícita, derivación médica e idempotencia) verificados contra PostgreSQL y UI web.
+- [x] Pruebas Jest con herramientas simuladas, control de rate limiting y `supertest` para el webhook.
 
 PR:
-Pendiente
+Pendiente de apertura en GitHub (`feat/whatsapp-agent` -> `main`)
 
 Commit:
-Pendiente
+test(whatsapp): agregar rate limiting por telefono y suite Jest (TASK-023)
 
 Fecha de inicio:
 2026-11-24
 
 Fecha de finalización:
-Pendiente
+2026-11-26
 
 Notas:
-Aprobación de esquema BD coordinada con Charbel y reglas de disponibilidad de citas con Roque/Naye.
-
+Aprobación de esquema BD coordinada con Charbel y reglas de disponibilidad de citas con Roque/Naye. Implementado bajo aislamiento estricto ADR-005 sin modificar rutas /api/v1 ni el frontend.
 -----------------------------------------------------------------
 ### [TASK-024] Despliegue Full-Stack en Producción (Neon + Render + Vercel)
 - **Estado:** Completada (`DONE`)
